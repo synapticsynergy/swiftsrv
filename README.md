@@ -1,2 +1,0 @@
-# sqrtl
-restaurant suggestion app
