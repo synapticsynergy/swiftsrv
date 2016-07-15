@@ -1,7 +1,7 @@
 angular.model('sqrtl.httpRequest', [])
   .factory('Adventures', function($http){
     //requests venues that meet location and category criteria
-    //TODO: add user parameters
+    //TODO: add user parameters and such
     var requestAdventures = function(category, location){
       return $http({
         method: 'GET',
