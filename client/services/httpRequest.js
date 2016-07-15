@@ -27,7 +27,9 @@ angular.model('sqrtl.httpRequest', [])
         method: 'POST',
         url: '/adventure',
         data: JSON
+      }).then(functon(){
+        //should do something.
       })
     }
 
-  })
+  });
