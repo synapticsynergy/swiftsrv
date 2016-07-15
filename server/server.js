@@ -1,9 +1,15 @@
 var express = require('express');
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var app = express();
 
-require('./middleware.js')(app, express);
-require('./routes.js')(app, express);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(express.static('client'));
+
+
+app.get('/', function(req,res){
+  console.log('Do something');
+});
 
 
 module.exports = app;
