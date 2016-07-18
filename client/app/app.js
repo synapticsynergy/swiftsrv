@@ -1,15 +1,18 @@
-Angular.model("sqrtl", [
-    "sqrtl.httpRequest"
+angular.module("sqrtl", [
+    // "sqrtl.httpRequest"
+    "sqrtl.form",
+    "ui.router",
+    "ngRoute"
   ])
-  .config(function($stateProvider, $urlRouteProvider){
+  .config(function($stateProvider, $urlRouterProvider){
     //sets default state when the app is booted
-    $urlRouteProvider
-      .otherwise('/form');
+    // $urlRouterProvider
+    //   .otherwise('/form');
     //the form state that allows users to create their request
     $stateProvider
       .state('form', {
         url: '/form',
-        templateUrl: 'views/form.html',
+        templateUrl: 'app/form/form.html',
         controller: 'FormController'
       });
   });
