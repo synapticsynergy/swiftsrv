@@ -4,31 +4,35 @@ var request = require('request');
 var _ = require('lodash');
 var config = require('./config.js');
 
+var constructQuery = function(searchParam){
+  var baseurl = 'https://api.yelp.com/v2/search';
 
-var baseurl = 'https://api.yelp.com/v2/search';
+  var params = { location: "San Francisco",
+                  term: "food"
+                  };
 
-var params = { location: "San Francisco",
-                term: "food"
-                };
-
-var fullParams = _.assign(params, config);
+  var fullParams = _.assign(params, searchParam, config);
 
 
-var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
+  var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
 
-fullParams.oauth_signature = signature;
+  fullParams.oauth_signature = signature;
 
-var paramURL = qs.stringify(fullParams);
+  var paramURL = qs.stringify(fullParams);
 
-var url = baseurl + '?' + paramURL;
-console.log('URL IS: ',url);
+  var url = baseurl + '?' + paramURL;
+  console.log('URL IS: ',url);
+  return url;
+};
 
 module.exports = {
 
   getYelp: function(req, res, next){
     console.log('req body is: ', req.body.data);
     //data: {category: "", location: ""}
-    request(url, function(err, response, body){
+    var yelpURL = constructQuery(req.body.data);
+
+    request(yelpURL, function(err, response, body){
       //send GET request to YELP API, receive YELP result in response
       //send response as res for getYelp request.
       if (!err && response.statusCode === 200){
