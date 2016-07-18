@@ -1,42 +1,38 @@
 var oauthSignature = require('oauth-signature');
-//var qs = require('qs');
+var qs = require('querystring');
 var request = require('request');
 var _ = require('lodash');
 var config = require('./config.js');
 
+var constructQuery = function(searchParam){
+  var baseurl = 'https://api.yelp.com/v2/search';
 
-var baseurl = 'https://api.yelp.com/v2/search';
+  var params = { location: "San Francisco",
+                  term: "food"
+                  };
 
-var searchurl = 'term=food&location="San Francisco"';
-
-var params = { location: "San Francisco",
-                term: "food"
-                };
-
-var fullParams = _.assign(config, params);
+  var fullParams = _.assign(params, searchParam, config);
 
 
-var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
+  var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
 
-console.log("signature ", signature);
+  fullParams.oauth_signature = signature;
 
-var configurl = '&oauth_consumer_key=' + config.consumerkey +
-                  '&oauth_token=' + config.token +
-                  '&oauth_signature_method=' + config.signaturemethod +
-                  '&oauth_timestamp=' + config.timestamp +
-                  '&oauth_nonce=' + config.nonce +
-                  '&oauth_version=' + config.version +
-                  '&oauth_signature=' + signature/*STUFF HERE*/;
+  var paramURL = qs.stringify(fullParams);
 
-var url = baseurl + searchurl + configurl;
-console.log('URL IS: ',url);
+  var url = baseurl + '?' + paramURL;
+  console.log('URL IS: ',url);
+  return url;
+};
 
 module.exports = {
 
   getYelp: function(req, res, next){
     console.log('req body is: ', req.body.data);
     //data: {category: "", location: ""}
-    request(url, function(err, response, body){
+    var yelpURL = constructQuery(req.body.data);
+
+    request(yelpURL, function(err, response, body){
       //send GET request to YELP API, receive YELP result in response
       //send response as res for getYelp request.
       if (!err && response.statusCode === 200){
