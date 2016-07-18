@@ -1,5 +1,5 @@
 angular.module("sqrtl", [
-    // "sqrtl.httpRequest"
+    "sqrtl.httpRequest",
     "sqrtl.form",
     "ui.router",
     "ngRoute"
