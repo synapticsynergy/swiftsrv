@@ -6,8 +6,8 @@ angular.module("sqrtl", [
   ])
   .config(function($stateProvider, $urlRouterProvider){
     //sets default state when the app is booted
-    // $urlRouterProvider
-    //   .otherwise('/form');
+    $urlRouterProvider
+      .otherwise('/form');
     //the form state that allows users to create their request
     $stateProvider
       .state('form', {
