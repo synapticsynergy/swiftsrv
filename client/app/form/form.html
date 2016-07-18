@@ -1,0 +1,14 @@
+<div>
+  <form>
+    <div>
+      <input type="text" name="category" placeholder="Category" ng-model="category">
+    </div>
+    <div>
+      <input type="text" name="location" placeholder="Location" ng-model="location">
+    </div>
+    <div>
+      <button ng-Click="getLocationAndCategory(location, category)">Grab Adventure</button>
+    </div>
+  </form>
+  <p>{{ adventure }}</p>
+</div>
