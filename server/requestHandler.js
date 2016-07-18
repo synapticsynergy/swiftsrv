@@ -1,5 +1,5 @@
 var oauthSignature = require('oauth-signature');
-//var qs = require('qs');
+var qs = require('querystring');
 var request = require('request');
 var _ = require('lodash');
 var config = require('./config.js');
@@ -7,28 +7,20 @@ var config = require('./config.js');
 
 var baseurl = 'https://api.yelp.com/v2/search';
 
-var searchurl = 'term=food&location="San Francisco"';
-
 var params = { location: "San Francisco",
                 term: "food"
                 };
 
-var fullParams = _.assign(config, params);
+var fullParams = _.assign(params, config);
 
 
 var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
 
-console.log("signature ", signature);
+fullParams.oauth_signature = signature;
 
-var configurl = '&oauth_consumer_key=' + config.consumerkey +
-                  '&oauth_token=' + config.token +
-                  '&oauth_signature_method=' + config.signaturemethod +
-                  '&oauth_timestamp=' + config.timestamp +
-                  '&oauth_nonce=' + config.nonce +
-                  '&oauth_version=' + config.version +
-                  '&oauth_signature=' + signature/*STUFF HERE*/;
+var paramURL = qs.stringify(fullParams);
 
-var url = baseurl + searchurl + configurl;
+var url = baseurl + '?' + paramURL;
 console.log('URL IS: ',url);
 
 module.exports = {

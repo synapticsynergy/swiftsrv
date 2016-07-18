@@ -18,13 +18,13 @@ var non = n();
 
 
 module.exports = {
-  consumerkey: "64XR6hqr1y1Z0asgJn8O2g",
+  oauth_consumer_key: "64XR6hqr1y1Z0asgJn8O2g",
   consumersecret: "af8A4H5Hm8B-iKteM6UuipShz0c",
-  token: "iIT7yl4Lt9EHTRkTsR9iqyaw4eYCEHbw",
+  oauth_token: "iIT7yl4Lt9EHTRkTsR9iqyaw4eYCEHbw",
   tokensecret: "NAK8_0aY814vCUIcCSSOeGolxtQ",
-  signaturemethod: "HMAC-SHA1",
-  timestamp: ts,
-  nonce: non(),
-  version: "1.0"
+  oauth_signature_method: "HMAC-SHA1",
+  oauth_timestamp: ts,
+  oauth_nonce: non(),
+  oauth_version: "1.0"
 };
 
