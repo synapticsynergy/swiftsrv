@@ -7,13 +7,11 @@ var config = require('./config.js');
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
-  var params = { location: "San Francisco",
-                  term: "food",
-                  limit: 5,
+  var params = {  limit: 5,
                   sort: 2
                   };
 
-  var fullParams = _.assign(params, searchParam, config);
+  var fullParams = _.extend(params, searchParam, config);
 
 
   var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
@@ -30,9 +28,9 @@ var constructQuery = function(searchParam){
 module.exports = {
 
   getYelp: function(req, res, next){
-    console.log('req body is: ', req.body.data);
+    console.log('req body is: ', req.body);
     //data: {category: "", location: ""}
-    var yelpURL = constructQuery(req.body.data);
+    var yelpURL = constructQuery(req.body);
 
     request(yelpURL, function(err, response, body){
       //send GET request to YELP API, receive YELP result in response
