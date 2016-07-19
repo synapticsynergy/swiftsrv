@@ -3,15 +3,15 @@ angular.module('sqrtl.httpRequest', [])
     //requests venues that meet location and category criteria
     //TODO: add user parameters and such
     var requestAdventures = function(location, category){
-      var url = 'http://jsonplaceholder.typicode.com/posts/1';
+      var url = '/api/getYelp';
       //actual url is '/api/getYelp'
       return $http({
-        method: 'GET',
+        method: 'POST',
         url: url,
-        // data: JSON.stringify({
-        //   category: category,
-        //   location: location
-        // })
+        data: JSON.stringify({
+          term: category,
+          location: location
+        })
       }).then(function(resp){
         return resp;//.data;
       })
