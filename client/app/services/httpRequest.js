@@ -47,9 +47,9 @@ angular.module('sqrtl.httpRequest', [])
         method: 'GET',
         url: '/api/getUber'
       }).then(function(resp){
-        return resp;
+        return resp.data;
       });
-    }
+    };
 
 
     return {

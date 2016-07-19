@@ -1,5 +1,4 @@
 var requestHandler = require('./requestHandler.js');
-var userController = require('./userController.js');
 
 //add other controllers here
 
