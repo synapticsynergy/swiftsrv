@@ -1,4 +1,4 @@
-// API v2.0
+// YELP API v2.0
 
 // Consumer Key  64XR6hqr1y1Z0asgJn8O2g
 // Consumer Secret af8A4H5Hm8B-iKteM6UuipShz0c
@@ -8,8 +8,7 @@
 //url format
 //&oauth_consumer_key=64XR6hqr1y1Z0asgJn8O2g&oauth_token=iIT7yl4Lt9EHTRkTsR9iqyaw4eYCEHbw&oauth_signature_method=HMAC-SHA1&oauth_timestamp=***********&oauth_nonce=************&oauth_version=1.0&oauth_signature=2XRYeNqQJ9%2FOFekZ7chSoWxL7Kw%3D
 
-//timestamp = datenow
-//nonce = timestamp + rando-number
+
 
 var n = require('nonce');
 

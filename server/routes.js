@@ -8,6 +8,7 @@ var requestHandler = require('./requestHandler.js');
 module.exports = function (app, express){
   app.post('/api/getYelp', requestHandler.getYelp);
 
+  app.post('/api/getUber', requestHandler.getUber);
   //app.post('/', requestHandler.someotherfn);
 
 };
