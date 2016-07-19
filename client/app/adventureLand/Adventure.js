@@ -11,7 +11,7 @@ angular.module('sqrtl.adventure', [])
 
   $scope.data = Adventures.dataShift();
 
-  var getNew = function(){
+  $scope.getNew = function(){
     $scope.data = Adventures.dataShift();
   };
 
@@ -23,6 +23,12 @@ angular.module('sqrtl.adventure', [])
       $location.path(response);
     });
   };
+  $scope.address = {
+    long: $scope.data.location.coordinate.longitude,
+    lat: $scope.data.location.coordinate.latitude
+  }
+  //http://maps.google.com/maps?q=24.197611,120.780512
+
 
 
 
