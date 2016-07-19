@@ -1,10 +1,17 @@
 angular.module("sqrtl.form", [])
-  .controller("FormController", function($scope, Adventures){
+  .controller("FormController", function($scope, $state, Adventures){
     $scope.adventure = {};
     $scope.getLocationAndCategory = function(location, category){
       Adventures.requestAdventures(location, category)
         .then(function(data) {
-          $scope.adventure = data;
+          console.log(data);
+          return true;
+        })
+        .then(function(){
+          $scope.data = Adventures.dataShift();
+        })
+        .then(function(){
+          $state.go('adventure');
         });
     };
   });
