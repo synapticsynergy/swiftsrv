@@ -5,7 +5,7 @@ angular.module("sqrtl.auth", [])
   .controller("AuthController", function($scope){
     $scope.signOut = function () {
       var auth2 = gapi.auth2.getAuthInstance();
-
+      console.log(auth2.currentUser);
       auth2.signOut()
         .then(function () {
           console.log('User signed out.');
