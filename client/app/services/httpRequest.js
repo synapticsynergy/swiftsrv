@@ -42,10 +42,20 @@ angular.module('sqrtl.httpRequest', [])
       return data.shift();
     };
 
+    var getUber = function(){
+      return $http({
+        method: 'GET',
+        url: '/api/getUber'
+      }).then(function(resp){
+        return resp;
+      });
+    }
+
 
     return {
       requestAdventures: requestAdventures,
-      dataShift: dataShift
+      dataShift: dataShift,
+      getUber: getUber
     };
 
   });
