@@ -1,6 +1,6 @@
 angular.module('sqrtl.adventure', [])
 
-.controller('AdventureController', function($scope, Adventures) {
+.controller('AdventureController', function($scope, $location, Adventures) {
   // var businessName;
   // var distance;
   // var reviewCount;
@@ -17,7 +17,11 @@ angular.module('sqrtl.adventure', [])
 
   $scope.getUber = function(location){
     console.log("location coords ", location);
-    Adventures.getUber();
+    Adventures.getUber()
+    .then(function(response){
+      console.log("redirect URL ", response);
+      $location.path(response);
+    });
   };
 
 

@@ -53,7 +53,7 @@ module.exports = {
 
     var tokenURL = Uber.getAuthorizeUrl(['history','profile', 'request', 'places']);
     console.log('tokenURL', tokenURL);
-    res.redirect(tokenURL);
+    res.status(200).send(tokenURL);
 
   },
 
