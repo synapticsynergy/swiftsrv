@@ -42,6 +42,7 @@ angular.module('sqrtl.adventure', [])
 
 
 
+
 });
 
 
