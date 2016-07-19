@@ -1,6 +1,18 @@
 <div>
   <div>
-    <span><h3 id="name">Polar Express</h3></span><span><h3 id="distance">0 miles</h3></span><span><h3 id="reviewCount">1,000,000</h3></span>
+    <span><h3 id="name">{{data.name}}</h3></span><span><h3 id="distance">0 miles</h3></span><span><h3 id="reviewCount">{{data.reviewCount}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"><h3 id="reviewRating">{{data.rating}}</h3></span>
   </div>
-  <img src="https://unsplash.com/?photo=TfrraGFywuQ">
+  <div>
+    <img ng-src="{{data.image}}">
+  </div>
+  <div id="description">
+    <p>data.snippet</p>
+  </div>
+  <p>{{ data }}</p>
+  <div>
+    <button id="tryNext">try next</button>
+    <button id="uber">uber</button>
+    <button id="other">other</button>
+    <button id="tryThis">try this</button>
+  </div>
 </div>
