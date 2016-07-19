@@ -1,6 +1,7 @@
 angular.module("sqrtl", [
     "sqrtl.httpRequest",
     "sqrtl.form",
+    "sqrtl.adventure",
     "ui.router",
     "ngRoute"
   ])
@@ -14,5 +15,9 @@ angular.module("sqrtl", [
         url: '/form',
         templateUrl: 'app/form/form.html',
         controller: 'FormController'
+      }).state('adventure', {
+        url: '/adventure',
+        templateUrl: 'app/adventureLand/Adventure.html',
+        controller: 'AdventureController'
       });
   });
