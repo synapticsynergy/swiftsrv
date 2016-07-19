@@ -1,5 +1,6 @@
 angular.module("sqrtl", [
     "sqrtl.httpRequest",
+    "sqrtl.auth",
     "sqrtl.form",
     "sqrtl.adventure",
     "ui.router",
