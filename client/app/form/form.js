@@ -1,5 +1,6 @@
 angular.module("sqrtl.form", [])
   .controller("FormController", function($scope, $state, Adventures){
+
     $scope.adventure = {};
     $scope.getLocationAndCategory = function(location, category){
       Adventures.requestAdventures(location, category)
