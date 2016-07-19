@@ -15,6 +15,11 @@ angular.module('sqrtl.adventure', [])
     $scope.data = Adventures.dataShift();
   };
 
+  $scope.getUber = function(location){
+    console.log("location coords ", location);
+    Adventures.getUber();
+  };
+
 
 
 
