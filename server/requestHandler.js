@@ -2,7 +2,11 @@ var oauthSignature = require('oauth-signature');
 var qs = require('querystring');
 var request = require('request');
 var _ = require('lodash');
-var config = require('./config.js');
+var Yelp = require('./config.js').Yelp;
+var uberConfig = require('./config.js').Uber;
+var UBER = require('node-uber');
+
+var Uber = new UBER(uberConfig);
 
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
@@ -11,10 +15,10 @@ var constructQuery = function(searchParam){
                   sort: 2
                   };
 
-  var fullParams = _.extend(params, searchParam, config);
+  var fullParams = _.extend(params, searchParam, Yelp);
 
 
-  var signature = oauthSignature.generate('GET', baseurl, fullParams, config.consumersecret, config.tokensecret, { encodeSignature: true});
+  var signature = oauthSignature.generate('GET', baseurl, fullParams, Yelp.consumersecret, Yelp.tokensecret, { encodeSignature: true});
 
   fullParams.oauth_signature = signature;
 
@@ -43,23 +47,34 @@ module.exports = {
       }
     });
 
+  },
+
+  getUber: function(req, res, next){
+
+    var tokenURL = Uber.getAuthorizeUrl(['history','profile', 'request', 'places']);
+    console.log('tokenURL', tokenURL);
+    res.redirect(tokenURL);
+
+  },
+
+  uberRedir: function(req, res, next){
+
+      Uber.authorization({
+       authorization_code: req.query.code
+     }, function(err, access_token, refresh_token) {
+       if (err) {
+         console.error(err);
+       } else {
+         // store the user id and associated access token
+         // redirect the user back to your actual app
+         res.redirect('/');
+       }
+     });
+
   }
+
+
 
 };
 
 
-// module.exports = {
-//   consumerkey: "64XR6hqr1y1Z0asgJn8O2g",
-//   consumersecret: "af8A4H5Hm8B-iKteM6UuipShz0c",
-//   token: "iIT7yl4Lt9EHTRkTsR9iqyaw4eYCEHbw",
-//   tokensecret: "NAK8_0aY814vCUIcCSSOeGolxtQ",
-//   signaturemethod: "HMAC-SHA1",
-//   timestamp: n().toString().substr(0,10),
-//   nonce: n(),
-//   version: "1.0"
-// };
-
-
-
-//url format
-//https://api.yelp.com/v2/search?term=food&location="San Francisco"&oauth_consumer_key=64XR6hqr1y1Z0asgJn8O2g&oauth_token=iIT7yl4Lt9EHTRkTsR9iqyaw4eYCEHbw&oauth_signature_method=HMAC-SHA1&oauth_timestamp=***********&oauth_nonce=************&oauth_version=1.0&oauth_signature=2XRYeNqQJ9%2FOFekZ7chSoWxL7Kw%3D
