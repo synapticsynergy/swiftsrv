@@ -9,10 +9,13 @@ angular.module('sqrtl.adventure', [])
   // var businessImage;
   // var description;
 
-  $scope.data = Adventures.dataShift();
+  $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+
+  console.log($scope.data);
 
   $scope.getNew = function(){
-    $scope.data = Adventures.dataShift();
+    Adventures.dataShift();
+    $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
   };
 
   $scope.getUber = function(location){
