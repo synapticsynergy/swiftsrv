@@ -83,11 +83,13 @@ module.exports = {
       access_type: 'offline',
       scope: scopes
     });
+    console.log(url)
     res.status(200).send(url)
   },
 
   googleRedir: function (req, res, next){
     var code = req.query.code;
+    console.log(code);
     oauth2Client.getToken(code, function (err, tokens){
       if (err){
         console.error(err);
