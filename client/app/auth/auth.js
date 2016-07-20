@@ -2,10 +2,14 @@
 
 
 angular.module("sqrtl.auth", [])
-  .controller("AuthController", function($scope, Adventures){
+  .controller("AuthController", function($scope, Adventures, $window){
     $scope.login = function (){
       console.log("called in auth")
-      Adventures.authGoogle();
+      Adventures.authGoogle()
+        .then(function(response){
+          console.log("redirect URL ", response);
+          $window.location.href = response;
+        });
     }
   });
 
