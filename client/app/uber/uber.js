@@ -11,12 +11,15 @@ angular.module("sqrtl.uber", [])
       $scope.geo.getCurrentPosition(function(success){
         $scope.current.latitude = success.coords.latitude;
         $scope.current.longitude = success.coords.longitude;
-        $scope.destination.latitude = sessionStorage.getItem('latitude');
-        $scope.destination.longitude = sessionStorage.getItem('longitude');
+        $scope.destination.latitude = window.localStorage.getItem('latitude');
+        $scope.destination.longitude = window.localStorage.getItem('longitude');
         console.log($scope.current);
+        console.log($scope.destination);
       });
 
     };
+
+   // $scope.getPrice()
 
     $scope.geoFindMe();
   });

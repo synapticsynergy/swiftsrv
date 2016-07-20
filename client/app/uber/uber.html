@@ -1,4 +1,4 @@
-<div ng-controller='UberController'> Take me There!
+<div> Take me There!
   <form>
     <div> Current Location
       {{current}}
@@ -7,7 +7,8 @@
       {{destination}}
     </div>
     <div>
-      <button>Call my Uber</button>
+      <button ng-click='getPrice()'>Get Price Estimates</button>
+      <button>Get Available Uber Drivers</button>
     </div>
   </form>
 </div>
