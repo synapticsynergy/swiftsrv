@@ -2,8 +2,11 @@
 
 
 angular.module("sqrtl.auth", [])
-  .controller("AuthController", function($scope){
-
+  .controller("AuthController", function($scope, Adventures){
+    $scope.login = function (){
+      console.log("called in auth")
+      Adventures.authGoogle();
+    }
   });
 
 

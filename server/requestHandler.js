@@ -2,11 +2,15 @@ var oauthSignature = require('oauth-signature');
 var qs = require('querystring');
 var request = require('request');
 var _ = require('lodash');
+var UBER = require('node-uber');
+var Google = require('googleapis');
 var Yelp = require('./config.js').Yelp;
 var uberConfig = require('./config.js').Uber;
-var UBER = require('node-uber');
+var googleConfig = require('./config.js').Google;
 
 var Uber = new UBER(uberConfig);
+var oauth2Client = new Google.auth.OAuth2(googleConfig.CLIENT_ID, googleConfig.CLIENT_SECRET, googleConfig.REDIRECT_URL);
+
 
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
@@ -71,10 +75,30 @@ module.exports = {
        }
      });
 
-  }
+  },
+
+  authGoogle: function (req, res, next){
+    console.log('meh')
+    var scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
+    var url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: scopes
+    });
+    res.status(200).send(url)
+  },
+
+  googleRedir: function (req, res, next){
+    var code = req.query.code;
+    oauth2Client.getToken(code, function (err, tokens){
+      if (err){
+        console.error(err);
+      } else {
+        res.redirect('/#/form');
+      }
+    });
+  },
 
 
 
 };
-
 
