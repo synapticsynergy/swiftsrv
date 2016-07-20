@@ -17,6 +17,8 @@ angular.module('sqrtl.adventure', [])
 
   $scope.getUber = function(location){
     console.log("location coords ", location);
+    sessionStorage.setItem('latitude', location.latitude.toString());
+    sessionStorage.setItem('longitude', location.longitude.toString());
     Adventures.getUber()
     .then(function(response){
       console.log("redirect URL ", response);
