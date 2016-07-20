@@ -61,6 +61,9 @@ angular.module('sqrtl.httpRequest', [])
       return $http({
         method: 'GET',
         url: '/api/authGoogle'
+      }).then(function(resp){
+        console.log(resp);
+        return resp.data;
       });
     };
 
