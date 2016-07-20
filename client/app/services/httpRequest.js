@@ -56,6 +56,17 @@ angular.module('sqrtl.httpRequest', [])
         return resp.data;
       });
     };
+
+    var uberPrice = function(data){
+      return $http({
+        method: 'POST',
+        url: 'api/uberPrice',
+        data: JSON.stringify(data)
+      }).then(function(resp){
+        return resp.data;
+      });
+    };
+
     var authGoogle = function(){
       console.log("called in http")
       return $http({
@@ -71,6 +82,7 @@ angular.module('sqrtl.httpRequest', [])
       requestAdventures: requestAdventures,
       dataShift: dataShift,
       getUber: getUber,
+      uberPrice: uberPrice,
       authGoogle: authGoogle,
     };
 

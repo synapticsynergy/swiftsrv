@@ -14,7 +14,14 @@ angular.module("sqrtl.uber", [])
     };
 
 
-   // $scope.getPrice()
+   $scope.getPrice = function(){
+
+    Adventures.uberPrice()
+    .then(function(result){
+      console.log('price ', result);
+    });
+
+   };
 
     $scope.geoFindMe(function(success){
       $scope.$apply(function(){
