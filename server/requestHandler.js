@@ -78,7 +78,6 @@ module.exports = {
   },
 
   authGoogle: function (req, res, next){
-    console.log('meh')
     var scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
     var url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
