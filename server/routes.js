@@ -11,4 +11,7 @@ module.exports = function (app, express){
   //app.post('/', requestHandler.someotherfn);
   app.get('/api/uberRedir', requestHandler.uberRedir);
 
+  app.get('/api/authGoogle', requestHandler.authGoogle);
+
+  app.get('/api/googleRedir', requestHandler.googleRedir);
 };
