@@ -3,6 +3,7 @@ angular.module("sqrtl", [
     "sqrtl.auth",
     "sqrtl.form",
     "sqrtl.adventure",
+    "sqrtl.uber",
     "ui.router",
     "ngRoute"
   ])
@@ -10,6 +11,7 @@ angular.module("sqrtl", [
     //sets default state when the app is booted
     $urlRouterProvider
       .when('auth', '/auth')
+      .when('uber', '/uber')
       .otherwise('/form');
     //the form state that allows users to create their request
     $stateProvider
@@ -26,6 +28,11 @@ angular.module("sqrtl", [
         url: '/auth',
         templateUrl: 'app/auth/auth.html',
         controller: 'AuthController'
+      })
+      .state('uber',{
+        url: '/uber',
+        templateUrl: 'app/uber/uber.html',
+        controller: 'UberController'
       });
 
   });
