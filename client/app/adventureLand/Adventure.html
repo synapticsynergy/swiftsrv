@@ -1,18 +1,24 @@
-<div>
-  <div>
-    <span><h3 id="name">{{data.name}}</h3></span><span><h3 id="distance">0 miles</h3></span><span><h3 id="reviewCount">{{data.reviewCount}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"><h3 id="reviewRating">{{data.rating}}</h3></span>
-  </div>
-  <div>
-    <img ng-src="{{data.image}}">
-  </div>
-  <div id="description">
-    <p>data.snippet</p>
-  </div>
-  <p>{{ data }}</p>
-  <div>
-    <button id="tryNext" ng-Click="getNew()">try next</button>
-    <button id="uber" ng-click='getUber(data.location.coordinate)'>uber</button>
-    <button id="other">other</button>
-    <button id="tryThis" ng-Click="googleRedirect()">try this</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div>
+        <span><h3 id="name">{{data.name}}</h3></span><span><h3 id="distance">0 miles</h3></span><span><h3 id="reviewCount">{{data.reviewCount}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"><h3 id="reviewRating">{{data.rating}}</h3></span>
+      </div>
+      <div>
+        <img ng-src="{{data.image}}">
+      </div>
+      <div id="description">
+        <p>data.snippet</p>
+      </div>
+      <p>{{ data }}</p>
+      <div>
+        <button id="tryNext" ng-Click="getNew()">try next</button>
+        <button id="uber" ng-click='getUber(data.location.coordinate)'>uber</button>
+        <button id="other">other</button>
+        <button id="tryThis" ng-Click="googleRedirect()">try this</button>
+      </div>
+
+    </div>
   </div>
 </div>
