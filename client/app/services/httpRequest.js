@@ -50,13 +50,22 @@ angular.module('sqrtl.httpRequest', [])
         return resp.data;
       });
     };
-
+    var authGoogle = function(){
+      console.log("called in http")
+      return $http({
+        method: 'GET',
+        url: '/api/authGoogle'
+      });
+    };
 
     return {
       requestAdventures: requestAdventures,
       dataShift: dataShift,
-      getUber: getUber
+      getUber: getUber,
+      authGoogle: authGoogle,
     };
+
+
 
   });
   // .factory('UserResponses', function($http){
