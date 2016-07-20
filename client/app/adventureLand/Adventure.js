@@ -9,10 +9,13 @@ angular.module('sqrtl.adventure', [])
   // var businessImage;
   // var description;
 
-  $scope.data = Adventures.dataShift();
+  $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+
+  console.log($scope.data);
 
   $scope.getNew = function(){
-    $scope.data = Adventures.dataShift();
+    Adventures.dataShift();
+    $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
   };
 
   $scope.getUber = function(location){
@@ -37,6 +40,7 @@ angular.module('sqrtl.adventure', [])
     $window.location.href = $scope.address.templateUrl;
   };
   //http://maps.google.com/maps?q=24.197611,120.780512
+
 
 
 

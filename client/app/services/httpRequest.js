@@ -2,7 +2,7 @@ angular.module('sqrtl.httpRequest', [])
   .factory('Adventures', function($http){
     //requests venues that meet location and category criteria
     //TODO: add user parameters and such
-    var data = [];
+    // var data = [];
 
     var requestAdventures = function(location, category){
 
@@ -31,6 +31,8 @@ angular.module('sqrtl.httpRequest', [])
             location: datum.location
           };
         });
+        window.localStorage.setItem('data',JSON.stringify(data));
+        data = JSON.parse(window.localStorage.getItem('data'));
         return data;
       })
       .catch(function(err){
@@ -39,7 +41,11 @@ angular.module('sqrtl.httpRequest', [])
     };
 
     var dataShift = function(){
-      return data.shift();
+      data = JSON.parse(window.localStorage.getItem('data'));
+      shiftedData = data.shift();
+      window.localStorage.setItem('data',JSON.stringify(data));
+      console.log(JSON.parse(window.localStorage.getItem('data')));
+      return shiftedData;
     };
 
     var getUber = function(){
