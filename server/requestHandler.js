@@ -89,10 +89,11 @@ module.exports = {
   googleRedir: function (req, res, next){
     var code = req.query.code;
     oauth2Client.getToken(code, function (err, tokens){
+      console.log(tokens);
       if (err){
-        console.error(err);
+        res.redirect('http://localhost:3000/#/auth');
       } else {
-        res.redirect('/#/form');
+        res.redirect('http://localhost:3000/#/form');
       }
     });
   },
