@@ -1,23 +1,25 @@
 
-<div class="row container formPage"></div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
-  <h3 class="text-center">What Do You Want to Do?</h3>
-  <form role="form">
-    <div>
-      <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
+<div class="container">
+  <div class="row formPage">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class="text-center">What Do You Want to Do?</h3>
+      <form role="form">
+        <div>
+          <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
+        </div>
+        <div>
+          <input type="text" name="location" placeholder="Location" ng-model="location" class="form-control text-center">
+        </div>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button ng-Click="getLocationAndCategory(location, category)" class="btn">Grab Adventure</button>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </form>
     </div>
-    <div>
-      <input type="text" name="location" placeholder="Location" ng-model="location" class="form-control text-center">
-    </div>
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <button ng-Click="getLocationAndCategory(location, category)" class="btn">Grab Adventure</button>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-  </form>
-</div>
-<div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+  </div>
 </div>
