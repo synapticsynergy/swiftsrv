@@ -1,0 +1,8 @@
+body {
+/*  background-image: url('https://images.unsplash.com/photo-1442551382982-e59a4efb3c86?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=e131e5a1a12b40fca905f81eb90df89d');*/
+  background-image: url('https://images.unsplash.com/photo-1422393462206-207b0fbd8d6b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=b09f84e8e8fd58ee91faf817b9f903d7');
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+}
