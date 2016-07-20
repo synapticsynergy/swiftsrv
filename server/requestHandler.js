@@ -67,7 +67,7 @@ module.exports = {
        } else {
          // store the user id and associated access token
          // redirect the user back to your actual app
-         res.redirect('/');
+         res.redir('/uber');
        }
      });
 
