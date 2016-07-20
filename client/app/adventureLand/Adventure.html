@@ -9,10 +9,10 @@
     <p>data.snippet</p>
   </div>
   <p>{{ data }}</p>
-  <div ng-controller='AdventureController'>
-    <button id="tryNext">try next</button>
+  <div>
+    <button id="tryNext" ng-Click="getNew()">try next</button>
     <button id="uber" ng-click='getUber(data.location.coordinate)'>uber</button>
     <button id="other">other</button>
-    <button id="tryThis">try this</button>
+    <button id="tryThis" ng-Click="googleRedirect()">try this</button>
   </div>
 </div>
