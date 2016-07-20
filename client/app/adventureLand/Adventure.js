@@ -17,12 +17,12 @@ angular.module('sqrtl.adventure', [])
 
   $scope.getUber = function(location){
     console.log("location coords ", location);
-    sessionStorage.setItem('latitude', location.latitude.toString());
-    sessionStorage.setItem('longitude', location.longitude.toString());
+    window.localStorage.setItem('latitude', location.latitude.toString());
+    window.localStorage.setItem('longitude', location.longitude.toString());
     Adventures.getUber()
     .then(function(response){
       console.log("redirect URL ", response);
-      $location.path(response);
+      $window.location.href = response;
     });
   };
 
