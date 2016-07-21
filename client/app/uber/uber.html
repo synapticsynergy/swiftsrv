@@ -10,7 +10,7 @@
       <button ng-click='getPrice()'>Get Price Estimates</button>
     </div>
     <ul>
-      <li ng-repeat='option in priceArray' ng-click='getRide(option.product_id)'>{{option.display_name}} {{option.estimate}} </li>
+      <li ng-repeat='option in priceArray'> <button ng-click='getRide(option.product_id)'>{{option.display_name}} {{option.estimate}} </button></li>
     </ul>
   </form>
 </div>
