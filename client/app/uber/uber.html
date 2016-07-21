@@ -1,16 +1,12 @@
 <div> Take me There!
   <form>
     <div>
-      <p>{{current}}</p>
-    </div>
-    <div>
-      <p>{{destination}}</p>
-    </div>
-    <div>
-      <button ng-click='getPrice()'>Get Price Estimates</button>
+      <span ng-hide='calculated'>Calculating Your Location...</span>
+      <button ng-click='getPrice()' ng-show='calculated'>Get Price Estimates</button>
     </div>
     <ul>
       <li ng-repeat='option in priceArray'><button  ng-click='getRide(option.product_id)'>{{option.display_name}} {{option.estimate}}</button> </li>
     </ul>
+    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
   </form>
 </div>
