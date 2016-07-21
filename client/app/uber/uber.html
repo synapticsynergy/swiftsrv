@@ -4,9 +4,10 @@
       <span ng-hide='calculated'>Calculating Your Location...</span>
       <button ng-click='getPrice()' ng-show='calculated'>Get Price Estimates</button>
     </div>
+    <div ng-show='gotRide'> Your {{trip.name}} is on its way!  </div>
     <ul>
-      <li ng-repeat='option in priceArray'><button  ng-click='getRide(option.product_id)'>{{option.display_name}} {{option.estimate}}</button> </li>
+      <li ng-repeat='option in priceArray'><button  ng-click='getRide(option.product_id, option.display_name)'>{{option.display_name}} {{option.estimate}}</button> </li>
     </ul>
-    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    <ui-gmap-google-map refresh='calculated' center='map.center' zoom='map.zoom'>{{map.center}}</ui-gmap-google-map>
   </form>
 </div>
