@@ -13,7 +13,8 @@
 // Client Id 1dPbx-9-3Sz7WrFVQR7K0gjJCOuUZhdh
 // Client Secret 2PtmgTtY-H6k8vkpfezPQXka7XuW4SWtd1AhpzGg
 // Server token  Lbgr7WY6COErXCRZ0S71NQ-BO6pDmTpDA9ced0ld
-
+// XXX NOTE - Sandbox MUST BE TRUE, or else you will order
+// a real uber on the production platform XXX
 
 
 
