@@ -79,7 +79,7 @@ angular.module('sqrtl.httpRequest', [])
 
 
     var authGoogle = function(){
-      console.log("called in http")
+      console.log("called in http");
       return $http({
         method: 'GET',
         url: '/api/authGoogle'
