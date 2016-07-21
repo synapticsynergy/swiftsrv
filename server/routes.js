@@ -13,6 +13,8 @@ module.exports = function (app, express){
 
   app.post('/api/uberPrice', requestHandler.uberPrice);
 
+  app.post('/api/uberRide', requestHandler.uberRide);
+
   app.get('/api/authGoogle', requestHandler.authGoogle);
 
   app.get('/api/googleRedir', requestHandler.googleRedir);
