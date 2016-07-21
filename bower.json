@@ -22,7 +22,8 @@
     "angular-ui-router": "^0.3.1",
     "angular-bootstrap": "^2.0.0",
     "bootstrap": "^3.3.6",
-    "ng-lodash": "^0.5.0"
+    "ng-lodash": "^0.5.0",
+    "stormpath-sdk-angularjs": "^1.0.0"
   },
   "resolutions": {
     "angular": ">=1.4.0"

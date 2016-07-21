@@ -7,14 +7,18 @@ angular.module("sqrtl", [
     "ui.router",
     "ngRoute",
     "ui.bootstrap",
-    "ngLodash"
+    "ngLodash",
+    'stormpath',
+    'stormpath.templates'
   ])
-  .config(function($stateProvider, $urlRouterProvider){
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
     $urlRouterProvider
       .when('auth', '/auth')
       .when('uber', '/uber')
       .otherwise('/form');
+
+    $locationProvider.html5Mode(true);
     //the form state that allows users to create their request
     $stateProvider
       .state('form', {
@@ -37,4 +41,14 @@ angular.module("sqrtl", [
         controller: 'UberController'
       });
 
-  });
+  })
+  .run(function($stormpath, $rootScope, $state){
+    $stormpath.uiRouter({
+      loginState: 'login',
+      defaultPostLoginState: 'form'
+    });
+
+    $rootScope.$on('$sessionEnd', function(){
+      $state.transitionTo('login');
+    });
+  })
