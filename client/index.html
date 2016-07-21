@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css"></link>
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
 </head>
 <body>
 <!--   Navbar -->
@@ -11,11 +12,19 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <a class="navbar-brand" href="#/form">SwiftSrv</a>
+        <a class="navbar-brand" ui-sref="form">SwiftSrv</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#/auth">Login</a></li>
+          <li if-not-user>
+            <a ui-sref="register">Register</a>
+          </li>
+          <li if-not-user>
+            <a ui-sref="login">Login</a>
+          </li>
+          <li if-user>
+            <a href="" sp-logout>Logout</a>
+          </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -31,6 +40,8 @@
   <script src="lib/angular-route/angular-route.js"></script>
   <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="lib/ng-lodash/build/ng-lodash.js"></script>
+  <script src="lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.min.js"></script>
+  <script src="lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.tpls.min.js"></script>
 
   <!-- app files -->
   <script src="app/app.js"></script>
