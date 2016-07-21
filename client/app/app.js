@@ -14,9 +14,8 @@ angular.module("sqrtl", [
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
     $urlRouterProvider
-      .when('auth', '/auth')
       .when('uber', '/uber')
-      .otherwise('/form');
+      .otherwise('/');
 
     $locationProvider.html5Mode(true);
     //the form state that allows users to create their request
@@ -24,21 +23,37 @@ angular.module("sqrtl", [
       .state('form', {
         url: '/form',
         templateUrl: 'app/form/form.html',
-        controller: 'FormController'
+        controller: 'FormController',
+        sp: {
+          authenticate: true
+        }
       }).state('adventure', {
         url: '/adventure',
         templateUrl: 'app/adventureLand/Adventure.html',
-        controller: 'AdventureController'
-      })
-      .state('auth',{
-        url: '/auth',
-        templateUrl: 'app/auth/auth.html',
-        controller: 'AuthController'
+        controller: 'AdventureController',
+        sp: {
+          authenticate: true
+        }
       })
       .state('uber',{
         url: '/uber',
         templateUrl: 'app/uber/uber.html',
-        controller: 'UberController'
+        controller: 'UberController',
+        sp: {
+          authenticate: true
+        }
+      })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/auth/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'app/auth/register.html'
+      })
+      .state('forgot', {
+        url: '/forgot',
+        templateUrl: 'app/auth/forgotPassword.html'
       });
 
   })
