@@ -77,6 +77,22 @@ module.exports = {
 
   },
 
+  uberPrice: function(req, res, next){
+
+    console.log("price location is ", req.body);
+
+    Uber.estimates.getPriceForRoute(req.body.start_lat, req.body.start_long, req.body.final_lat, req.body.final_long, function (err, resp) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(resp);
+        res.status(200).send(resp);
+      }
+    });
+
+
+  },
+
   authGoogle: function (req, res, next){
     var scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
     var url = oauth2Client.generateAuthUrl({

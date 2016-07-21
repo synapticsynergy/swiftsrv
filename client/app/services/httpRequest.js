@@ -67,6 +67,17 @@ angular.module('sqrtl.httpRequest', [])
       });
     };
 
+    var uberDrivers = function(data){
+      return $http({
+        method: 'POST',
+        url: 'api/uberDrivers',
+        data: JSON.stringify(data)
+      }).then(function(resp){
+        return resp.data;
+      });
+    };
+
+
     var authGoogle = function(){
       console.log("called in http")
       return $http({
@@ -83,6 +94,7 @@ angular.module('sqrtl.httpRequest', [])
       dataShift: dataShift,
       getUber: getUber,
       uberPrice: uberPrice,
+      uberDrivers: uberDrivers,
       authGoogle: authGoogle,
     };
 

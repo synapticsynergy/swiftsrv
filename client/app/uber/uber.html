@@ -8,7 +8,10 @@
     </div>
     <div>
       <button ng-click='getPrice()'>Get Price Estimates</button>
-      <button>Get Available Uber Drivers</button>
+      <button ng-click='getDrivers()'>Get Available Uber Drivers</button>
     </div>
+    <ul>
+      <li ng-repeat='option in priceArray'>{{option.display_name}} {{option.estimate}} </li>
+    </ul>
   </form>
 </div>
