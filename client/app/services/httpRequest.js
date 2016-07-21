@@ -1,5 +1,5 @@
-angular.module('sqrtl.httpRequest', [])
-  .factory('Adventures', function($http){
+angular.module('sqrtl.httpRequest', ["ngLodash"])
+  .factory('Adventures', function($http, lodash){
     //requests venues that meet location and category criteria
     //TODO: add user parameters and such
     // var data = [];
@@ -31,6 +31,9 @@ angular.module('sqrtl.httpRequest', [])
             location: datum.location
           };
         });
+        sortByReviewCount(data);
+        data = randomizeTopFive(data);
+
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
         return data;
@@ -40,12 +43,32 @@ angular.module('sqrtl.httpRequest', [])
       });
     };
 
+    //sorts data by highest reviews first.
+    var sortByReviewCount = function(data) {
+      data.sort(function(a,b) {
+        if (a.reviewCount < b.reviewCount) {
+          return 1;
+        }
+        if (a.reviewCount > b.reviewCount) {
+          return -1;
+        }
+        return 0;
+      });
+    };
+
+    var randomizeTopFive = function(data) {
+      var topFive = data.splice(0,5);
+      var shuffledFive = lodash.shuffle(topFive);
+      var newShuffledData = shuffledFive.concat(data);
+      return newShuffledData;
+    }
+
     var dataShift = function(){
+
       data = JSON.parse(window.localStorage.getItem('data'));
-      shiftedData = data.shift();
+      data.shift();
+      data = randomizeTopFive(data);
       window.localStorage.setItem('data',JSON.stringify(data));
-      console.log(JSON.parse(window.localStorage.getItem('data')));
-      return shiftedData;
     };
 
     var getUber = function(){
