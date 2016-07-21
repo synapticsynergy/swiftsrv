@@ -14,14 +14,37 @@ angular.module("sqrtl.uber", [])
     };
 
 
-   // $scope.getPrice()
+   $scope.getPrice = function(){
+    $scope.trip = { start_lat: $scope.current.latitude,
+                 start_long: $scope.current.longitude,
+                 final_lat: $scope.destination.latitude,
+                 final_long: $scope.destination.longitude};
 
-    $scope.geoFindMe(function(success){
-      $scope.$apply(function(){
-        $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
-        $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};
-        console.log($scope.current);
-        console.log($scope.destination);
-      });
+    Adventures.uberPrice($scope.trip)
+    .then(function(result){
+      console.log('price ', result);
+      $scope.priceArray = result.prices;
+    });
+
+   };
+
+   $scope.getRide = function(productId){
+    $scope.trip.productId = productId;
+    console.log('trip ', $scope.trip);
+
+    Adventures.uberRide($scope.trip)
+    .then(function(result){
+      console.log('ride ', result);
+    });
+
+   };
+
+  $scope.geoFindMe(function(success){
+    $scope.$apply(function(){
+      $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
+      $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};
+      console.log($scope.current);
+      console.log($scope.destination);
     });
   });
+});
