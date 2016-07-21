@@ -15,9 +15,13 @@
   "bugs": {
     "url": "https://github.com/jmg2107/sqrtl/issues"
   },
+   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
   "homepage": "https://github.com/jmg2107/sqrtl",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
     "express": "^4.14.0",
     "googleapis": "^11.0.0",
     "grunt": "^0.4.4",
