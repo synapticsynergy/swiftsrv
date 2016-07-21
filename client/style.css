@@ -33,3 +33,6 @@ body {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
+.angular-google-map-container { height: 200px;
+                                width: 200px; }
