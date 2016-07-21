@@ -6,7 +6,8 @@ angular.module("sqrtl", [
     "sqrtl.uber",
     "ui.router",
     "ngRoute",
-    "ui.bootstrap"
+    "ui.bootstrap",
+    "ngLodash"
   ])
   .config(function($stateProvider, $urlRouterProvider){
     //sets default state when the app is booted

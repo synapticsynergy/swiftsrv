@@ -10,7 +10,7 @@ angular.module("sqrtl.form", [])
         })
         .then(function(){
           $scope.data = window.localStorage.getItem('data')[0];
-          // $scope.data = Adventures.dataShift();
+
         })
         .then(function(){
           $state.go('adventure');
