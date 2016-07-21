@@ -1,18 +1,39 @@
-<div>
-  <div>
-    <span><h3 id="name">{{data.name}}</h3></span><span><h3 id="distance">0 miles</h3></span><span><h3 id="reviewCount">{{data.reviewCount}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"><h3 id="reviewRating">{{data.rating}}</h3></span>
+<div class="container viewsContainer">
+
+
+    <div class="row headingRow">
+    <div class="col-md-12 text-center">
+      <h1 id="name">{{data.name}}</h3>
+    </div>
   </div>
-  <div>
-    <img ng-src="{{data.image}}">
-  </div>
-  <div id="description">
-    <p>data.snippet</p>
-  </div>
-  <p>{{ data }}</p>
-  <div>
-    <button id="tryNext" ng-Click="getNew()">try next</button>
-    <button id="uber" ng-click='getUber(data.location.coordinate)'>uber</button>
-    <button id="other">other</button>
-    <button id="tryThis" ng-Click="googleRedirect()">try this</button>
+    <div class="row text-center dataRow">
+      <div class="col-md-2"></div>
+      <div class="col-md-2"><h3 id="distance">0 miles</h3></div>
+      <div class="col-md-2"> <h3 id="reviewCount">{{data.reviewCount}} reviews!</h3></div>
+      <div class="col-md-2"><h3 id="reviewRating">{{data.rating}}</h3><img id="starImage" ng-src="{{data.ratingImg}}"></div>
+      <div class="col-md-2"><h3>Click for More Details!</h3></div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <img class="imageSize" ng-src="{{data.image}}">
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+    <div class="row text-center advButtons">
+      <div class="col-md-3"></div>
+      <div class="col-md-2"><button class="btn btn-primary" id="tryNext" ng-Click="getNew()">Try Another</button></div>
+      <div class="col-md-2"> <button class="btn btn-primary" id="uber" ng-click='getUber(data.location.coordinate)'>Uber</button></div>
+      <div class="col-md-2"> <button class="btn btn-primary" id="tryThis" ng-Click="googleRedirect()">Challenge Accepted!</button></div>
+      <div class="col-md-3"></div>
+    </div>
+
+      <div>
+
+      </div>
+
   </div>
 </div>

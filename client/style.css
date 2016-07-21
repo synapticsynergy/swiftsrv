@@ -7,6 +7,29 @@ body {
   background-size:  cover;
 }
 
+.viewsContainer {
+  background-color: white;
+  border-radius: 50px;
+  opacity: 0.9;
+}
+
+.headingRow {
+  margin-top: 30px;
+}
+
+.dataRow {
+  margin-bottom: 15px;
+}
+
+.imageSize {
+  width: 100%;
+}
+
 .formPage {
-  opacity: 60%;
+  opacity: 80%;
+}
+
+.advButtons {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
