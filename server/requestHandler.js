@@ -45,7 +45,6 @@ module.exports = {
       //send GET request to YELP API, receive YELP result in response
       //send response as res for getYelp request.
       if (!err && response.statusCode === 200){
-        console.log(body);
         res.status(200).send(body);
       } else {
         //error getting stuff from yelp
