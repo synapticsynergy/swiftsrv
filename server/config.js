@@ -50,16 +50,3 @@ module.exports.Uber = {
   name: "SwiftServ",
   sandbox: true
 };
-
-module.exports.Google ={
-  CLIENT_ID : "675533001795-ogilvisa2ekn4ehkgvuh3qd19oovr2q3.apps.googleusercontent.com",
-  CLIENT_SECRET: "d5RHTO-rBKek0MYrYayjGuxu",
-  REDIRECT_URL: host + "/api/googleRedir"
-};
-
-// Client ID
-// 675533001795-ogilvisa2ekn4ehkgvuh3qd19oovr2q3.apps.googleusercontent.com
-// Client secret
-// d5RHTO-rBKek0MYrYayjGuxu
-// Creation date
-// Jul 19, 2016, 11:06:58 AM
