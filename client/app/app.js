@@ -66,4 +66,4 @@ angular.module("sqrtl", [
     $rootScope.$on('$sessionEnd', function(){
       $state.transitionTo('login');
     });
-  })
+  });
