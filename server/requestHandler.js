@@ -16,7 +16,7 @@ var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
   var params = {  limit: 20,
-                  offset: 30,
+                  offset: 20,
                   sort: 2
                   };
 
@@ -45,6 +45,7 @@ module.exports = {
       //send GET request to YELP API, receive YELP result in response
       //send response as res for getYelp request.
       if (!err && response.statusCode === 200){
+        console.log(body);
         res.status(200).send(body);
       } else {
         //error getting stuff from yelp
