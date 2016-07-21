@@ -7,6 +7,7 @@ var Google = require('googleapis');
 var Yelp = require('./config.js').Yelp;
 var uberConfig = require('./config.js').Uber;
 var googleConfig = require('./config.js').Google;
+var host = require('./config.js').host;
 
 var Uber = new UBER(uberConfig);
 var oauth2Client = new Google.auth.OAuth2(googleConfig.CLIENT_ID, googleConfig.CLIENT_SECRET, googleConfig.REDIRECT_URL);
