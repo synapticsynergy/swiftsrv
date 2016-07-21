@@ -67,10 +67,10 @@ angular.module('sqrtl.httpRequest', [])
       });
     };
 
-    var uberDrivers = function(data){
+    var uberRide = function(data){
       return $http({
         method: 'POST',
-        url: 'api/uberDrivers',
+        url: 'api/uberRide',
         data: JSON.stringify(data)
       }).then(function(resp){
         return resp.data;
@@ -94,7 +94,7 @@ angular.module('sqrtl.httpRequest', [])
       dataShift: dataShift,
       getUber: getUber,
       uberPrice: uberPrice,
-      uberDrivers: uberDrivers,
+      uberRide: uberRide,
       authGoogle: authGoogle,
     };
 
