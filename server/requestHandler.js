@@ -121,7 +121,7 @@ module.exports = {
       access_type: 'offline',
       scope: scopes
     });
-    res.status(200).send(url)
+    res.status(200).send(url);
   },
 
   googleRedir: function (req, res, next){
