@@ -4,13 +4,13 @@
 angular.module("sqrtl.auth", [])
   .controller("AuthController", function($scope, Adventures, $window){
     $scope.login = function (){
-      console.log("called in auth");
+      console.log("called in auth")
       Adventures.authGoogle()
         .then(function(response){
           console.log("redirect URL ", response);
           $window.location.href = response;
         });
-    };
+    }
   });
 
 
