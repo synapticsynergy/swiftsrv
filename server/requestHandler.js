@@ -94,6 +94,26 @@ module.exports = {
 
   },
 
+   uberRide: function(req, res, next){
+
+    console.log("Ride info is ", req.body);
+
+    Uber.requests.create({
+      "product_id": req.body.productId,
+      "start_latitude": req.body.start_lat,
+      "start_longitude": req.body.start_long,
+      "end_latitude": req.body.final_lat,
+      "end_longitude": req.body.final_long
+    }, function (err, resp) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('ride result ', resp);
+        res.status(200).send(resp);
+      }
+    });
+
+  },
   authGoogle: function (req, res, next){
     var scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
     var url = oauth2Client.generateAuthUrl({
