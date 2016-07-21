@@ -15,10 +15,6 @@ module.exports = function (app, express){
 
   app.post('/api/uberRide', requestHandler.uberRide);
 
-  app.get('/api/authGoogle', requestHandler.authGoogle);
-
-  app.get('/api/googleRedir', requestHandler.googleRedir);
-
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '..', 'client','index.html'));
   });
