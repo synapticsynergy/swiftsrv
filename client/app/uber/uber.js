@@ -1,11 +1,14 @@
-angular.module("sqrtl.uber", [])
-  .controller("UberController", function($scope, Adventures){
+angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
+  .controller("UberController", function($scope, lodash, Adventures){
 
-    var destination = { latitude: '0', longitude: '0'};
-    var current = { latitude: '0', longitude: '0'};
+    $scope.destination = { latitude: '0', longitude: '0'};
+    $scope.current = { latitude: '0', longitude: '0'};
 
-
+    $scope.calculated = false;
+    $scope.gotRide = false;
     $scope.geo = navigator.geolocation;
+    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 14};
+
 
     $scope.geoFindMe = function(callback){
       $scope.geo.getCurrentPosition(function(success){
@@ -28,13 +31,15 @@ angular.module("sqrtl.uber", [])
 
    };
 
-   $scope.getRide = function(productId){
+   $scope.getRide = function(productId, name){
     $scope.trip.productId = productId;
+    $scope.trip.name = name;
     console.log('trip ', $scope.trip);
 
     Adventures.uberRide($scope.trip)
     .then(function(result){
       console.log('ride ', result);
+      $scope.gotRide = true;
     });
 
    };
@@ -43,8 +48,13 @@ angular.module("sqrtl.uber", [])
     $scope.$apply(function(){
       $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
       $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};
+      $scope.map.center.latitude = parseFloat($scope.current.latitude);
+      $scope.map.center.longitude = parseFloat($scope.current.longitude);
+
       console.log($scope.current);
       console.log($scope.destination);
+      console.log($scope.map.center);
+      $scope.calculated = true;
     });
   });
 });

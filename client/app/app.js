@@ -7,8 +7,9 @@ angular.module("sqrtl", [
     "ngRoute",
     "ui.bootstrap",
     "ngLodash",
-    'stormpath',
-    'stormpath.templates'
+    "stormpath",
+    "stormpath.templates",
+    "uiGmapgoogle-maps"
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
@@ -65,4 +66,4 @@ angular.module("sqrtl", [
     $rootScope.$on('$sessionEnd', function(){
       $state.transitionTo('login');
     });
-  })
+  });

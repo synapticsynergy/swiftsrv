@@ -61,7 +61,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       var shuffledFive = lodash.shuffle(topFive);
       var newShuffledData = shuffledFive.concat(data);
       return newShuffledData;
-    }
+    };
 
     var dataShift = function(){
 

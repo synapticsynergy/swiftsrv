@@ -1,17 +1,8 @@
 angular.module('sqrtl.adventure', [])
 
 .controller('AdventureController', function($scope, $location, Adventures, $window) {
-  // var businessName;
-  // var distance;
-  // var reviewCount;
-  // var ratings;
-  // var ratingsImage;
-  // var businessImage;
-  // var description;
 
   $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
-
-  console.log($scope.data);
 
   $scope.getNew = function(){
     Adventures.dataShift();
@@ -42,10 +33,6 @@ angular.module('sqrtl.adventure', [])
   //http://maps.google.com/maps?q=24.197611,120.780512
 
 
-
-
-
-
 });
 
 
@@ -53,61 +40,73 @@ angular.module('sqrtl.adventure', [])
 
 angular.module("sqrtl", [
     "sqrtl.httpRequest",
-    "sqrtl.auth",
     "sqrtl.form",
     "sqrtl.adventure",
     "sqrtl.uber",
     "ui.router",
     "ngRoute",
-    "ui.bootstrap"
+    "ui.bootstrap",
+    "ngLodash",
+    "stormpath",
+    "stormpath.templates",
+    "uiGmapgoogle-maps"
   ])
-  .config(function($stateProvider, $urlRouterProvider){
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
     $urlRouterProvider
-      .when('auth', '/auth')
       .when('uber', '/uber')
-      .otherwise('/form');
+      .otherwise('/');
+
+    $locationProvider.html5Mode(true);
     //the form state that allows users to create their request
     $stateProvider
       .state('form', {
         url: '/form',
         templateUrl: 'app/form/form.html',
-        controller: 'FormController'
+        controller: 'FormController',
+        sp: {
+          authenticate: true
+        }
       }).state('adventure', {
         url: '/adventure',
         templateUrl: 'app/adventureLand/Adventure.html',
-        controller: 'AdventureController'
-      })
-      .state('auth',{
-        url: '/auth',
-        templateUrl: 'app/auth/auth.html',
-        controller: 'AuthController'
+        controller: 'AdventureController',
+        sp: {
+          authenticate: true
+        }
       })
       .state('uber',{
         url: '/uber',
         templateUrl: 'app/uber/uber.html',
-        controller: 'UberController'
+        controller: 'UberController',
+        sp: {
+          authenticate: true
+        }
+      })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/auth/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'app/auth/register.html'
+      })
+      .state('forgot', {
+        url: '/forgot',
+        templateUrl: 'app/auth/forgotPassword.html'
       });
 
+  })
+  .run(function($stormpath, $rootScope, $state){
+    $stormpath.uiRouter({
+      loginState: 'login',
+      defaultPostLoginState: 'form'
+    });
+
+    $rootScope.$on('$sessionEnd', function(){
+      $state.transitionTo('login');
+    });
   });
-// {"web":{"client_id":"675533001795-ogilvisa2ekn4ehkgvuh3qd19oovr2q3.apps.googleusercontent.com","project_id":"sqrtl-1377","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"d5RHTO-rBKek0MYrYayjGuxu"}}
-
-
-angular.module("sqrtl.auth", [])
-  .controller("AuthController", function($scope, Adventures, $window){
-    $scope.login = function (){
-      console.log("called in auth");
-      Adventures.authGoogle()
-        .then(function(response){
-          console.log("redirect URL ", response);
-          $window.location.href = response;
-        });
-    };
-  });
-
-
-
-
 angular.module("sqrtl.form", [])
   .controller("FormController", function($scope, $state, Adventures){
 
@@ -120,15 +119,15 @@ angular.module("sqrtl.form", [])
         })
         .then(function(){
           $scope.data = window.localStorage.getItem('data')[0];
-          // $scope.data = Adventures.dataShift();
+
         })
         .then(function(){
           $state.go('adventure');
         });
     };
   });
-angular.module('sqrtl.httpRequest', [])
-  .factory('Adventures', function($http){
+angular.module('sqrtl.httpRequest', ["ngLodash"])
+  .factory('Adventures', function($http, lodash){
     //requests venues that meet location and category criteria
     //TODO: add user parameters and such
     // var data = [];
@@ -160,6 +159,9 @@ angular.module('sqrtl.httpRequest', [])
             location: datum.location
           };
         });
+        sortByReviewCount(data);
+        data = randomizeTopFive(data);
+
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
         return data;
@@ -169,12 +171,32 @@ angular.module('sqrtl.httpRequest', [])
       });
     };
 
+    //sorts data by highest reviews first.
+    var sortByReviewCount = function(data) {
+      data.sort(function(a,b) {
+        if (a.reviewCount < b.reviewCount) {
+          return 1;
+        }
+        if (a.reviewCount > b.reviewCount) {
+          return -1;
+        }
+        return 0;
+      });
+    };
+
+    var randomizeTopFive = function(data) {
+      var topFive = data.splice(0,5);
+      var shuffledFive = lodash.shuffle(topFive);
+      var newShuffledData = shuffledFive.concat(data);
+      return newShuffledData;
+    };
+
     var dataShift = function(){
+
       data = JSON.parse(window.localStorage.getItem('data'));
-      shiftedData = data.shift();
+      data.shift();
+      data = randomizeTopFive(data);
       window.localStorage.setItem('data',JSON.stringify(data));
-      console.log(JSON.parse(window.localStorage.getItem('data')));
-      return shiftedData;
     };
 
     var getUber = function(){
@@ -243,14 +265,17 @@ angular.module('sqrtl.httpRequest', [])
   //   }
 
   // });
-angular.module("sqrtl.uber", [])
-  .controller("UberController", function($scope, Adventures){
+angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
+  .controller("UberController", function($scope, lodash, Adventures){
 
-    var destination = { latitude: '0', longitude: '0'};
-    var current = { latitude: '0', longitude: '0'};
+    $scope.destination = { latitude: '0', longitude: '0'};
+    $scope.current = { latitude: '0', longitude: '0'};
 
-
+    $scope.calculated = false;
+    $scope.gotRide = false;
     $scope.geo = navigator.geolocation;
+    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 14};
+
 
     $scope.geoFindMe = function(callback){
       $scope.geo.getCurrentPosition(function(success){
@@ -273,13 +298,15 @@ angular.module("sqrtl.uber", [])
 
    };
 
-   $scope.getRide = function(productId){
+   $scope.getRide = function(productId, name){
     $scope.trip.productId = productId;
+    $scope.trip.name = name;
     console.log('trip ', $scope.trip);
 
     Adventures.uberRide($scope.trip)
     .then(function(result){
       console.log('ride ', result);
+      $scope.gotRide = true;
     });
 
    };
@@ -288,8 +315,13 @@ angular.module("sqrtl.uber", [])
     $scope.$apply(function(){
       $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
       $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};
+      $scope.map.center.latitude = parseFloat($scope.current.latitude);
+      $scope.map.center.longitude = parseFloat($scope.current.longitude);
+
       console.log($scope.current);
       console.log($scope.destination);
+      console.log($scope.map.center);
+      $scope.calculated = true;
     });
   });
 });
