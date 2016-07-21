@@ -24,6 +24,8 @@
     "bootstrap": "^3.3.6"
   },
   "resolutions": {
-    "angular": ">=1.4.0"
+    "angular": ">=1.4.0",
+    "bootstrap": "^3.3.6",
+    "ng-lodash": "^0.5.0"
   }
 }
