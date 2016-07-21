@@ -31,8 +31,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
             location: datum.location
           };
         });
-        // sortByReviewCount(data);
-        // console.log(data);
+        sortByReviewCount(data);
+        data = randomizeTopFive(data);
 
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
@@ -44,35 +44,31 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     };
 
     //sorts data by highest reviews first.
-    // var sortByReviewCount = function(data) {
-    //   data.sort(function(a,b) {
-    //     if (a.reviewCount < b.reviewCount) {
-    //       return 1;
-    //     }
-    //     if (a.reviewCount > b.reviewCount) {
-    //       return -1;
-    //     }
-    //     return 0;
-    //   });
-    // };
+    var sortByReviewCount = function(data) {
+      data.sort(function(a,b) {
+        if (a.reviewCount < b.reviewCount) {
+          return 1;
+        }
+        if (a.reviewCount > b.reviewCount) {
+          return -1;
+        }
+        return 0;
+      });
+    };
 
-    // var randomizeTopFive = function(data) {
-    //   var topFive = data.splice(0,5);
-    //   var shuffledFive = lodash.shuffle(topFive);
-    //   var newShuffledData = shuffledFive.concat(data);
-    //   console.log(shuffledFive, 'ten shuffle!!!!', newShuffledData);
-
-    // }
+    var randomizeTopFive = function(data) {
+      var topFive = data.splice(0,5);
+      var shuffledFive = lodash.shuffle(topFive);
+      var newShuffledData = shuffledFive.concat(data);
+      return newShuffledData;
+    }
 
     var dataShift = function(){
-      data = JSON.parse(window.localStorage.getItem('data'));
-      console.log(data,"looking for second run");
-      // randomizeTopFive(data);
 
-      shiftedData = data.shift();
+      data = JSON.parse(window.localStorage.getItem('data'));
+      data.shift();
+      data = randomizeTopFive(data);
       window.localStorage.setItem('data',JSON.stringify(data));
-      console.log(JSON.parse(window.localStorage.getItem('data')));
-      return shiftedData;
     };
 
     var getUber = function(){
