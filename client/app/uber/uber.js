@@ -15,12 +15,12 @@ angular.module("sqrtl.uber", [])
 
 
    $scope.getPrice = function(){
-    var data = { start_lat: $scope.current.latitude,
+    $scope.trip = { start_lat: $scope.current.latitude,
                  start_long: $scope.current.longitude,
                  final_lat: $scope.destination.latitude,
                  final_long: $scope.destination.longitude};
 
-    Adventures.uberPrice(data)
+    Adventures.uberPrice($scope.trip)
     .then(function(result){
       console.log('price ', result);
       $scope.priceArray = result.prices;
@@ -28,11 +28,13 @@ angular.module("sqrtl.uber", [])
 
    };
 
-   $scope.getDrivers = function(){
+   $scope.getRide = function(productId){
+    $scope.trip.productId = productId;
+    console.log('trip ', $scope.trip);
 
-    Adventures.uberDrivers($scope.current)
+    Adventures.uberRide($scope.trip)
     .then(function(result){
-      console.log('drivers ', result);
+      console.log('ride ', result);
     });
 
    };

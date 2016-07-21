@@ -15,7 +15,8 @@ var oauth2Client = new Google.auth.OAuth2(googleConfig.CLIENT_ID, googleConfig.C
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
-  var params = {  limit: 5,
+  var params = {  limit: 20,
+                  offset: 30,
                   sort: 2
                   };
 
