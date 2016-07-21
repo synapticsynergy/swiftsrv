@@ -15,7 +15,8 @@ var oauth2Client = new Google.auth.OAuth2(googleConfig.CLIENT_ID, googleConfig.C
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
-  var params = {  limit: 5,
+  var params = {  limit: 20,
+                  offset: 30,
                   sort: 2
                   };
 
@@ -71,12 +72,48 @@ module.exports = {
        } else {
          // store the user id and associated access token
          // redirect the user back to your actual app
-         res.redirect('http://localhost:3000/#/uber');
+         res.redirect('/#/uber');
        }
      });
 
   },
 
+  uberPrice: function(req, res, next){
+
+    console.log("price location is ", req.body);
+
+    Uber.estimates.getPriceForRoute(req.body.start_lat, req.body.start_long, req.body.final_lat, req.body.final_long, function (err, resp) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(resp);
+        res.status(200).send(resp);
+      }
+    });
+
+
+  },
+
+   uberRide: function(req, res, next){
+
+    console.log("Ride info is ", req.body);
+
+    Uber.requests.create({
+      "product_id": req.body.productId,
+      "start_latitude": req.body.start_lat,
+      "start_longitude": req.body.start_long,
+      "end_latitude": req.body.final_lat,
+      "end_longitude": req.body.final_long
+    }, function (err, resp) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('ride result ', resp);
+        res.status(200).send(resp);
+      }
+    });
+
+  },
   authGoogle: function (req, res, next){
     var scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
     var url = oauth2Client.generateAuthUrl({
