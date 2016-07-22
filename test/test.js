@@ -1,16 +1,13 @@
-xdescribe('Routing', function () {
-  var $state;
-  beforeEach(module('sqrtl'));
+describe('Adventures', function () {
+  var $httpBackend;
+  beforeEach(module('sqrtl.httpRequest'));
 
-  beforeEach(inject(function ($injector) {
-    $state = $injector.get('$state');
+  beforeEach(inject(function (_$httpBackend_, _lodash_) {
+    $httpBackend = _$httpBackend_;
   }));
 
-  it('Should have /uber route, template, and controller', function () {
-    expect($state.states['/uber']).to.be.defined;
-    expect($state.states['/uber'].controller).to.equal('UberController');
-    expect($state.states['/uber'].templateUrl).to.equal('app/uber/uber.html');
+  it('exists', function () {
+    expect(0).to.be(0);
   });
-
 });
 
