@@ -8,7 +8,7 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
     $scope.gotRide = false;
     $scope.gotPrices = false;
     $scope.geo = navigator.geolocation;
-    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 14};
+    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 10};
 
 
     $scope.geoFindMe = function(callback){
