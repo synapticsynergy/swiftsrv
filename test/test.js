@@ -1,12 +1,16 @@
-var assert = chai.assert;
-var should = chai.should();
-var expect = chai.expect;
+xdescribe('Routing', function () {
+  var $state;
+  beforeEach(module('sqrtl'));
 
-describe('Test the Client-Side', function() {
-  describe('Test the input boxes', function(){
-    it('should exist', function(){
-      expect(0).to.equal(0);
-    });
+  beforeEach(inject(function ($injector) {
+    $state = $injector.get('$state');
+  }));
 
+  it('Should have /uber route, template, and controller', function () {
+    expect($state.states['/uber']).to.be.defined;
+    expect($state.states['/uber'].controller).to.equal('UberController');
+    expect($state.states['/uber'].templateUrl).to.equal('app/uber/uber.html');
   });
+
 });
+
