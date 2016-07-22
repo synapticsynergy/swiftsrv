@@ -21,6 +21,8 @@ module.exports = function (config) {
       'client/lib/angular/angular.js',
       'client/lib/angular-route/angular-route.js',
       'client/lib/angular-mocks/angular-mocks.js',
+      'client/lib/angular-ui-router/release/angular-ui-router.js',
+      'client/lib/ng-lodash/build/ng-lodash.js',
 
       // our app code
       'client/app/**/*.js',
