@@ -6,6 +6,7 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
 
     $scope.calculated = false;
     $scope.gotRide = false;
+    $scope.gotPrices = false;
     $scope.geo = navigator.geolocation;
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 14};
 
@@ -27,6 +28,7 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
     .then(function(result){
       console.log('price ', result);
       $scope.priceArray = result.prices;
+      $scope.gotPrices = true;
     });
 
    };
