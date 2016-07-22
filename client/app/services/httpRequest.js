@@ -4,7 +4,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     //TODO: add user parameters and such
     // var data = [];
 
-    var requestAdventures = function(location, category){
+    var requestAdventures = function(location, category, cll){
 
 
       var url = '/api/getYelp';
@@ -14,7 +14,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         url: url,
         data: JSON.stringify({
           term: category,
-          location: location
+          location: location,
+          cll: cll
         })
       }).then(function(resp){
         // data.push(resp);
@@ -112,6 +113,13 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       });
     };
 
+    var geoFindMe = function(callback){
+      var geo = navigator.geolocation;
+      geo.getCurrentPosition(function(success){
+        callback(success);
+      });
+    };
+
     return {
       requestAdventures: requestAdventures,
       dataShift: dataShift,
@@ -119,6 +127,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       uberPrice: uberPrice,
       uberRide: uberRide,
       authGoogle: authGoogle,
+      geoFindMe: geoFindMe
     };
 
 
