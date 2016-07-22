@@ -1,13 +1,31 @@
-<div> Take me There!
-  <form>
-    <div>
-      <span ng-hide='calculated'>Calculating Your Location...</span>
-      <button ng-click='getPrice()' ng-show='calculated'>Get Price Estimates</button>
+
+<div class="container viewsContainer">
+  <div class="row headingRow">
+    <div class="col-md-12 text-center">
+      <h1>Take me There!</h1>
     </div>
-    <div ng-show='gotRide'> Your {{trip.name}} is on its way!  </div>
-    <ul>
-      <li ng-repeat='option in priceArray'><button  ng-click='getRide(option.product_id, option.display_name)'>{{option.display_name}} {{option.estimate}}</button> </li>
-    </ul>
-    <ui-gmap-google-map refresh='calculated' center='map.center' zoom='map.zoom'>{{map.center}}</ui-gmap-google-map>
-  </form>
+  </div>
+
+  <div class="row text-center dataRow">
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <span ng-hide='calculated'>Calculating Your Location...</span>
+        <button ng-click='getPrice()' ng-show='calculated'>Get Price Estimates</button>
+      </div>
+      <div class="col-md-2" ng-show='gotRide'>Your {{trip.name}} is on its way! </div>
+      <div class="col-md-3" ng-show='gotPrices'>Click specific ride to order Uber<button ng-repeat='option in priceArray' ng-click='getRide(option.product_id, option.display_name)'>{{option.display_name}} {{option.estimate}}</button></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
+
+      <ui-gmap-google-map refresh='calculated' center='map.center' zoom='map.zoom'>{{map.center}}
+        <ui-gmap-marker idKey='0' coords='map.center'>
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+  </div>
+
+
+
+
+
+
 </div>
