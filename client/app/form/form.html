@@ -1,29 +1,24 @@
 
 <div class="container">
-  <div class="row formPage">
+  <div class="row headingRow">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <h3 class="text-center">What Would You Like to Do?</h3>
+      <h3 class="text-center formSpacing">Can't decide what to do?</h3>
+      <h4 class="text-center">Let us decide for you!</h2>
       <form role="form">
-        <div>
-          <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
-        </div>
-        <div>
+        <div class="formSpacing">
           <input type="text" name="location" placeholder="Location" ng-model="location" class="form-control text-center">
         </div>
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-4">
-            <button ng-Click="findMe()" class="btn">Use Current Location</button>
+        <div class="formBtn">
+            <button ng-Click="findMe()" class="btn btn-default center-block">Use Current Location</button>
             <div ng-show='calculating'> Calculating Current Location.. </div>
-          </div>
         </div>
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-4">
-            <button ng-hide='calculating' ng-Click="getLocationAndCategory(location, category)" class="btn">Grab Adventure</button>
-          </div>
-          <div class="col-md-4"></div>
+        <div class="formSpacing">
+          <input type="text" name="category" placeholder="Category" ng-model="category" class="form-control text-center">
+        </div>
+        <div class="row formBtn">
+          <div class="col-md-12">
+            <button ng-hide='calculating' ng-Click="getLocationAndCategory(location, category)" class="btn btn-default center-block"> Adventure Time!</button>
         </div>
       </form>
     </div>
