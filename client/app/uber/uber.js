@@ -3,19 +3,10 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
 
     $scope.destination = { latitude: '0', longitude: '0'};
     $scope.current = { latitude: '0', longitude: '0'};
-
     $scope.calculated = false;
     $scope.gotRide = false;
     $scope.gotPrices = false;
-    $scope.geo = navigator.geolocation;
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 10};
-
-
-    $scope.geoFindMe = function(callback){
-      $scope.geo.getCurrentPosition(function(success){
-        callback(success);
-      });
-    };
 
 
    $scope.getPrice = function(){
@@ -46,7 +37,11 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
 
    };
 
-  $scope.geoFindMe(function(success){
+  $scope.FindMe = function(callback){
+    Adventures.geoFindMe(callback);
+  };
+
+  $scope.FindMe(function(success){
     $scope.$apply(function(){
       $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
       $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};
