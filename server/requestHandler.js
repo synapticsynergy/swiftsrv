@@ -14,7 +14,6 @@ var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
 
   var params = {  limit: 20,
-                  offset: 20,
                   sort: 2
                   };
 

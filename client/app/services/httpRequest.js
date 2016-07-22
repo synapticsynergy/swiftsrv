@@ -20,6 +20,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       }).then(function(resp){
         // data.push(resp);
         // resp = JSON.parse(resp);
+        console.log(resp.data.total);
+        console.log(resp.data);
         data = resp.data.businesses.map(function(datum){
           return {
             name: datum.name,
@@ -37,6 +39,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
 
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
+
         return data;
       })
       .catch(function(err){
