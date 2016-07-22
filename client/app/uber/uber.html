@@ -17,7 +17,10 @@
       <div class="col-md-2"></div>
       <div class="col-md-2"></div>
 
-      <ui-gmap-google-map refresh='calculated' center='map.center' zoom='map.zoom'>{{map.center}}</ui-gmap-google-map>
+      <ui-gmap-google-map refresh='calculated' center='map.center' zoom='map.zoom'>{{map.center}}
+        <ui-gmap-marker idKey='0' coords='map.center'>
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
   </div>
 
 
