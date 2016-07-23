@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('UberController', function () {
+describe('UberController', function () {
   var $rootScope, Adventures, $scope, createController;
   beforeEach(module('sqrtl'));
   beforeEach(inject(function ($injector) {
@@ -27,8 +27,8 @@ xdescribe('UberController', function () {
     expect($scope.getPrice).to.be.a('function');
   });
 
-  it('UberController has method findMe', function () {
-    expect($scope.findMe).to.be.a('function');
+  it('UberController has method FindMe', function () {
+    expect($scope.FindMe).to.be.a('function');
   });
 
   it('UberController has method getRide', function () {
