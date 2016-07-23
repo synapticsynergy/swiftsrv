@@ -35,6 +35,11 @@ From within the root directory:
 
 npm install
 
+to run basic tests - grunt test
+to build - grunt build
+
+to start server - node index.js
+
 
 ### Roadmap
 

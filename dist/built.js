@@ -110,7 +110,7 @@ angular.module("sqrtl", [
 angular.module("sqrtl.form", ['uiGmapgoogle-maps'])
   .controller("FormController", function($scope, $state, Adventures){
 
-    $scope.geocoder = new google.maps.Geocoder();
+    $scope.geocoder = google.maps.Geocoder;
     $scope.adventure = {};
     $scope.cll = undefined;
     $scope.cllYelp = undefined;
