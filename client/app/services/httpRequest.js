@@ -104,18 +104,6 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       });
     };
 
-
-    var authGoogle = function(){
-      console.log("called in http");
-      return $http({
-        method: 'GET',
-        url: '/api/authGoogle'
-      }).then(function(resp){
-        console.log(resp);
-        return resp.data;
-      });
-    };
-
     var geoFindMe = function(callback){
       var geo = navigator.geolocation;
       geo.getCurrentPosition(function(success){
@@ -129,7 +117,6 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       getUber: getUber,
       uberPrice: uberPrice,
       uberRide: uberRide,
-      authGoogle: authGoogle,
       geoFindMe: geoFindMe
     };
 
