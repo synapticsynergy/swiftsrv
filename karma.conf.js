@@ -19,15 +19,17 @@ module.exports = function (config) {
     files: [
       // angular source
       'client/lib/angular/angular.js',
-      'client/lib/ng-lodash/build/ng-lodash.js',
       'client/lib/angular-mocks/angular-mocks.js',
+      'client/lib/angular-google-maps/dist/angular-google-maps.min.js',
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCt5CQ-CEIt1wIVvi8jWGqIhGI6AxBAuVM',
+      'test/mock.js',
+      'client/lib/ng-lodash/build/ng-lodash.js',
       'client/lib/angular-ui-router/release/angular-ui-router.js',
       'client/lib/angular-route/angular-route.js',
       'client/lib/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.min.js',
       'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.tpls.min.js',
       'client/lib/angular-simple-logger/dist/angular-simple-logger.min.js',
-      'client/lib/angular-google-maps/dist/angular-google-maps.min.js',
 
 
       // our app code
@@ -45,10 +47,10 @@ module.exports = function (config) {
     autoWatch: false,
 
    // start these browsers. PhantomJS will load up in the background
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     // if true, Karma exits after running the tests.
-    singleRun: true,
+    singleRun: false,
 
     // any additional plugins needed for testing
     plugins: [
@@ -57,7 +59,8 @@ module.exports = function (config) {
       'karma-sinon',
       'karma-nyan-reporter',
       'karma-unicorn-reporter',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-chrome-launcher'
     ]
 
   });
