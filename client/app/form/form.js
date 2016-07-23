@@ -3,10 +3,10 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps'])
 
     $scope.geocoder = new google.maps.Geocoder();
     $scope.adventure = {};
-    $scope.cll;
-    $scope.cllYelp;
+    $scope.cll = undefined;
+    $scope.cllYelp = undefined;
     $scope.calculating = false;
-    $scope.location;
+    $scope.location = undefined;
 
     $scope.getLocationAndCategory = function(location, category){
       Adventures.requestAdventures(location, category, $scope.cllYelp)

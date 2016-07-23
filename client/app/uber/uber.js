@@ -1,5 +1,5 @@
-angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
-  .controller("UberController", function($scope, lodash, Adventures){
+angular.module("sqrtl.uber", ['uiGmapgoogle-maps'])
+  .controller("UberController", function($scope, Adventures){
 
     $scope.destination = { latitude: '0', longitude: '0'};
     $scope.current = { latitude: '0', longitude: '0'};
