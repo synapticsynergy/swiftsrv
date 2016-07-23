@@ -105,8 +105,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     };
 
     var geoFindMe = function(callback){
-      var geo = navigator.geolocation;
-      geo.getCurrentPosition(function(success){
+      navigator.geolocation.getCurrentPosition(function(success){
         callback(success);
       });
     };

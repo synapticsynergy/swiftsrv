@@ -28,6 +28,20 @@ describe('Adventures Factory', function () {
     expect(Adventures.getUber).to.be.a('function');
   });
 
+  it('should send back response with getUber', function () {
+      var mockResponse =
+        { authorized: "signed in!"
+        };
+
+      $httpBackend.expect('GET', '/api/getUber').respond(mockResponse);
+
+      Adventures.getUber().then(function (resp) {
+        expect(resp).to.deep.equal(mockResponse);
+      });
+
+      $httpBackend.flush();
+  });
+
   it('Adventures has method uberPrice', function () {
     expect(Adventures.uberPrice).to.be.a('function');
   });
