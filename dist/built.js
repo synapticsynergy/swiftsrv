@@ -55,7 +55,7 @@ angular.module("sqrtl", [
     //sets default state when the app is booted
     $urlRouterProvider
       .when('uber', '/uber')
-      .otherwise('/');
+      .otherwise('/form');
 
     $locationProvider.html5Mode(true);
     //the form state that allows users to create their request
@@ -107,12 +107,18 @@ angular.module("sqrtl", [
       $state.transitionTo('login');
     });
   });
-angular.module("sqrtl.form", [])
+angular.module("sqrtl.form", ['uiGmapgoogle-maps'])
   .controller("FormController", function($scope, $state, Adventures){
 
+    $scope.geocoder = new google.maps.Geocoder();
     $scope.adventure = {};
+    $scope.cll = undefined;
+    $scope.cllYelp = undefined;
+    $scope.calculating = false;
+    $scope.location = undefined;
+
     $scope.getLocationAndCategory = function(location, category){
-      Adventures.requestAdventures(location, category)
+      Adventures.requestAdventures(location, category, $scope.cllYelp)
         .then(function(data) {
           console.log(data);
           return true;
@@ -125,6 +131,37 @@ angular.module("sqrtl.form", [])
           $state.go('adventure');
         });
     };
+
+    $scope.findMe = function(){
+      $scope.calculating = true;
+      Adventures.geoFindMe(function(success){
+        $scope.$apply(function(){
+           $scope.cll = {latitude: success.coords.latitude, longitude: success.coords.longitude};
+           $scope.cllYelp = success.coords.latitude + "," + success.coords.longitude;
+           console.log("cll", $scope.cll);
+           $scope.reverseGeocode();
+           $scope.calculating = false;
+        });
+      });
+    };
+
+    $scope.reverseGeocode = function(){
+
+      var latlng = new google.maps.LatLng($scope.cll.latitude, $scope.cll.longitude);
+      $scope.geocoder.geocode({'latLng': latlng}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+          $scope.$apply(function(){
+            console.log("geocode results ", results[0].formatted_address);
+            $scope.location = results[0].formatted_address;
+          });
+        } else {
+          console.log("Geocoder failed due to: " + status);
+        }
+      });
+    };
+
+
+
   });
 angular.module('sqrtl.httpRequest', ["ngLodash"])
   .factory('Adventures', function($http, lodash){
@@ -132,7 +169,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     //TODO: add user parameters and such
     // var data = [];
 
-    var requestAdventures = function(location, category){
+    var requestAdventures = function(location, category, cll){
 
 
       var url = '/api/getYelp';
@@ -142,11 +179,14 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         url: url,
         data: JSON.stringify({
           term: category,
-          location: location
+          location: location,
+          cll: cll
         })
       }).then(function(resp){
         // data.push(resp);
         // resp = JSON.parse(resp);
+        console.log(resp.data.total);
+        console.log(resp.data);
         data = resp.data.businesses.map(function(datum){
           return {
             name: datum.name,
@@ -164,6 +204,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
 
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
+
         return data;
       })
       .catch(function(err){
@@ -228,15 +269,9 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       });
     };
 
-
-    var authGoogle = function(){
-      console.log("called in http");
-      return $http({
-        method: 'GET',
-        url: '/api/authGoogle'
-      }).then(function(resp){
-        console.log(resp);
-        return resp.data;
+    var geoFindMe = function(callback){
+      navigator.geolocation.getCurrentPosition(function(success){
+        callback(success);
       });
     };
 
@@ -246,7 +281,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       getUber: getUber,
       uberPrice: uberPrice,
       uberRide: uberRide,
-      authGoogle: authGoogle,
+      geoFindMe: geoFindMe
     };
 
 
@@ -265,24 +300,15 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
   //   }
 
   // });
-angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
-  .controller("UberController", function($scope, lodash, Adventures){
+angular.module("sqrtl.uber", ['uiGmapgoogle-maps'])
+  .controller("UberController", function($scope, Adventures){
 
     $scope.destination = { latitude: '0', longitude: '0'};
     $scope.current = { latitude: '0', longitude: '0'};
-
     $scope.calculated = false;
     $scope.gotRide = false;
     $scope.gotPrices = false;
-    $scope.geo = navigator.geolocation;
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680}, zoom: 10};
-
-
-    $scope.geoFindMe = function(callback){
-      $scope.geo.getCurrentPosition(function(success){
-        callback(success);
-      });
-    };
 
 
    $scope.getPrice = function(){
@@ -313,7 +339,11 @@ angular.module("sqrtl.uber", ['ngLodash', 'uiGmapgoogle-maps'])
 
    };
 
-  $scope.geoFindMe(function(success){
+  $scope.FindMe = function(callback){
+    Adventures.geoFindMe(callback);
+  };
+
+  $scope.FindMe(function(success){
     $scope.$apply(function(){
       $scope.current = {latitude: success.coords.latitude, longitude: success.coords.longitude};
       $scope.destination = {latitude: window.localStorage.getItem('latitude'), longitude: window.localStorage.getItem('longitude')};

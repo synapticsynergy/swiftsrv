@@ -1,12 +1,12 @@
-# Project Name
+# SwiftSrv
 
-> Pithy project description
+> Can't decide what to do tonight?  We'll help decide for you.
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Blake Danson
+  - __Scrum Master__: Jennica Goo
+  - __Development Team Members__: Connor Campbell, Victor Lin
 
 ## Table of Contents
 
@@ -20,15 +20,11 @@
 
 ## Usage
 
-> Some usage instructions
+> Create a new account with the app via Registration and login.  Enter the location that you'd like to search in or click Current Location.  Enter a keyword for the kind of adventure you'd like.  Click Grab Adventure.  Click Try Another if you want to see another adventure; Challenge Accepted to view its location; and Uber to grab an Uber for it.  In Uber, click grab estimates to see your Uber options and click a price to order that uber.
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 4.4.7
 
 ## Development
 
@@ -36,15 +32,13 @@
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
+
 npm install
-bower install
-```
+
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://waffle.io/sqrtl/sqrtl)
 
 
 ## Contributing
