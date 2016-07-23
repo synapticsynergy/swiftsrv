@@ -19,8 +19,16 @@ module.exports = function (config) {
     files: [
       // angular source
       'client/lib/angular/angular.js',
-      'client/lib/angular-route/angular-route.js',
+      'client/lib/ng-lodash/build/ng-lodash.js',
       'client/lib/angular-mocks/angular-mocks.js',
+      'client/lib/angular-ui-router/release/angular-ui-router.js',
+      'client/lib/angular-route/angular-route.js',
+      'client/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+      'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.min.js',
+      'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.tpls.min.js',
+      'client/lib/angular-simple-logger/dist/angular-simple-logger.min.js',
+      'client/lib/angular-google-maps/dist/angular-google-maps.min.js',
+
 
       // our app code
       'client/app/**/*.js',
