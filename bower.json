@@ -16,15 +16,18 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.12",
-    "angular-route": "~1.4.12",
-    "angular-mocks": "~1.4.12",
-    "angular-ui-router": "^0.3.1",
+    "angular": "1.5.8",
     "angular-bootstrap": "^2.0.0",
+    "angular-google-maps": "^2.3.3",
+    "angular-mocks": "1.5.8",
+    "angular-route": "1.5.8",
+    "angular-touch": "1.5.8",
+    "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.6",
     "ng-lodash": "^0.5.0",
-    "stormpath-sdk-angularjs": "^1.0.0",
-    "angular-google-maps": "^2.3.3",
-    "angular-touch": "^1.5.8"
+    "stormpath-sdk-angularjs": "^1.0.0"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
   }
 }
