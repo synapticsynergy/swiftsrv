@@ -1,4 +1,4 @@
-angular.module("sqrtl.uber", ['uiGmapgoogle-maps'])
+angular.module("sqrtl.uber", ['uiGmapgoogle-maps', 'ngTouch'])
   .controller("UberController", function($scope, Adventures){
 
     $scope.destination = { latitude: '0', longitude: '0'};
