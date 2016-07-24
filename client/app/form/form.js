@@ -1,4 +1,4 @@
-angular.module("sqrtl.form", ['uiGmapgoogle-maps'])
+angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
   .controller("FormController", function($scope, $state, Adventures){
 
     $scope.geocoder = new google.maps.Geocoder();

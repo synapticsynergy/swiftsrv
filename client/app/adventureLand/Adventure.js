@@ -1,4 +1,4 @@
-angular.module('sqrtl.adventure', [])
+angular.module('sqrtl.adventure', ["ngTouch"])
 
 .controller('AdventureController', function($scope, $location, Adventures, $window) {
 
