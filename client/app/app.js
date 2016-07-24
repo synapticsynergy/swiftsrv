@@ -9,7 +9,8 @@ angular.module("sqrtl", [
     "ngLodash",
     "stormpath",
     "stormpath.templates",
-    "uiGmapgoogle-maps"
+    "uiGmapgoogle-maps",
+    "ngTouch"
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
