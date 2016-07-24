@@ -30,6 +30,7 @@ module.exports = function (config) {
       'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.min.js',
       'client/lib/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.tpls.min.js',
       'client/lib/angular-simple-logger/dist/angular-simple-logger.min.js',
+      'client/lib/angular-touch/angular-touch.js',
 
 
       // our app code

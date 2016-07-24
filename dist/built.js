@@ -1,4 +1,4 @@
-angular.module('sqrtl.adventure', [])
+angular.module('sqrtl.adventure', ["ngTouch"])
 
 .controller('AdventureController', function($scope, $location, Adventures, $window) {
 
@@ -49,7 +49,8 @@ angular.module("sqrtl", [
     "ngLodash",
     "stormpath",
     "stormpath.templates",
-    "uiGmapgoogle-maps"
+    "uiGmapgoogle-maps",
+    "ngTouch"
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
     //sets default state when the app is booted
@@ -107,10 +108,10 @@ angular.module("sqrtl", [
       $state.transitionTo('login');
     });
   });
-angular.module("sqrtl.form", ['uiGmapgoogle-maps'])
+angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
   .controller("FormController", function($scope, $state, Adventures){
 
-    $scope.geocoder = google.maps.Geocoder;
+    $scope.geocoder = new google.maps.Geocoder();
     $scope.adventure = {};
     $scope.cll = undefined;
     $scope.cllYelp = undefined;
@@ -300,7 +301,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
   //   }
 
   // });
-angular.module("sqrtl.uber", ['uiGmapgoogle-maps'])
+angular.module("sqrtl.uber", ['uiGmapgoogle-maps', 'ngTouch'])
   .controller("UberController", function($scope, Adventures){
 
     $scope.destination = { latitude: '0', longitude: '0'};
