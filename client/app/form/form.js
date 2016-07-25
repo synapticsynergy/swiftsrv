@@ -1,5 +1,8 @@
 angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
-  .controller("FormController", function($scope, $state, Adventures, LocationFactory){
+
+  .controller("FormController", function($scope, $state, Adventures, $touch){
+
+    $touch.ngClickOverrideEnabled(true);
 
     $scope.geocoder = new google.maps.Geocoder();
     $scope.adventure = {};
