@@ -21,6 +21,7 @@ angular.module("sqrtl", [
     $locationProvider.html5Mode(true);
     //the form state that allows users to create their request
     $stateProvider
+      //functionality states
       .state('form', {
         url: '/form',
         templateUrl: 'app/form/form.html',
@@ -45,6 +46,7 @@ angular.module("sqrtl", [
           authenticate: true
         }
       })
+      //stormpath authentication states
       .state('login', {
         url: '/login',
         templateUrl: 'app/auth/login.html'
@@ -60,11 +62,13 @@ angular.module("sqrtl", [
 
   })
   .run(function($stormpath, $rootScope, $state){
+    //informs stormpath what state associates with login 
+    //and where to state to take afterwards
     $stormpath.uiRouter({
       loginState: 'login',
       defaultPostLoginState: 'form'
     });
-
+    //redirects users to the login state when a session expires
     $rootScope.$on('$sessionEnd', function(){
       $state.transitionTo('login');
     });
