@@ -1,12 +1,16 @@
 angular.module('sqrtl.adventure', ["ngTouch"])
 
-.controller('AdventureController', function($scope, $location, Adventures, $window) {
+.controller('AdventureController', function($scope, $location, Adventures, $window, LocationFactory) {
 
   $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+  var distance = LocationFactory.findDistance($scope.data.location.coordinate);
+  distance? $scope.distance = distance + 'km' : $scope.distance = undefined;
 
   $scope.getNew = function(){
     Adventures.dataShift();
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+    var distance = LocationFactory.findDistance($scope.data.location.coordinate);
+    distance? $scope.distance = distance + 'km' : $scope.distance = undefined;
   };
 
   $scope.getUber = function(location){
