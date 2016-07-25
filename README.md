@@ -20,7 +20,7 @@
 
 ## Usage
 
-> Create a new account with the app via Registration and login.  Enter the location that you'd like to search in or click Current Location.  Enter a keyword for the kind of adventure you'd like.  Click Grab Adventure.  Click Try Another if you want to see another adventure; Challenge Accepted to view its location; and Uber to grab an Uber for it.  In Uber, click grab estimates to see your Uber options and click a price to order that uber.
+> Create a new account with the app via Registration and login.  Enter the location that you'd like to search in or click Current Location.  Enter a keyword for the kind of adventure you'd like.  Click Adventure Time.  Click Try Another if you want to see another adventure; Challenge Accepted to view its location; and Uber to grab an Uber for it.  In Uber, click grab estimates to see your Uber options and click a price to order that uber.
 
 ## Requirements
 
@@ -36,6 +36,7 @@ From within the root directory:
 npm install
 
 to run basic tests - grunt test
+
 to build - grunt build
 
 to start server - node index.js
