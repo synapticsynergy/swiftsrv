@@ -1,5 +1,5 @@
 angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
-  .controller("FormController", function($scope, $state, Adventures){
+  .controller("FormController", function($scope, $state, Adventures, LocationFactory){
 
     $scope.geocoder = new google.maps.Geocoder();
     $scope.adventure = {};
@@ -29,6 +29,7 @@ angular.module("sqrtl.form", ['uiGmapgoogle-maps','ngTouch'])
         $scope.$apply(function(){
            $scope.cll = {latitude: success.coords.latitude, longitude: success.coords.longitude};
            $scope.cllYelp = success.coords.latitude + "," + success.coords.longitude;
+           LocationFactory.setCoordinates($scope.cll);
            console.log("cll", $scope.cll);
            $scope.reverseGeocode();
            $scope.calculating = false;
