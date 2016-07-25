@@ -1,3 +1,7 @@
+
+#implemented stormpath using this guide. https://github.com/stormpath/express-stormpath-angular-sample-project
+#https://coderwall.com/p/wrhxia/handle-all-authentication-with-node-angular-and-stormpath
+
 client:
   apiKey:
     id: VRMLYPOQGLIJU4UZ4YLIOURXX
