@@ -25,6 +25,7 @@ angular.module("sqrtl", [
         url: '/form',
         templateUrl: 'app/form/form.html',
         controller: 'FormController',
+        //stormpath will check if the user is authenticated if there is a state change if they try to navigate to form, adventure, or uber.
         sp: {
           authenticate: true
         }
