@@ -24,6 +24,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         console.log(resp.data);
         data = resp.data.businesses.map(function(datum){
           return {
+            url: datum.url,
             name: datum.name,
             image: datum.image_url.replace(/ms.jpg/i, 'o.jpg'),
             isClosed: datum.is_closed,

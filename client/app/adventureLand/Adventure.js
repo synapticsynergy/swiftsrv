@@ -6,6 +6,10 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   var distance = LocationFactory.findDistance($scope.data.location.coordinate);
   distance? $scope.distance = distance + 'km' : $scope.distance = undefined;
 
+  $scope.moreDetails = function(){
+    $window.location.href = $scope.data.url;
+  };
+
   $scope.getNew = function(){
     Adventures.dataShift();
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
