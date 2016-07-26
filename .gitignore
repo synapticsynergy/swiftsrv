@@ -3,3 +3,4 @@ db
 .floo
 .flooignore
 client/lib
+server/config.js
