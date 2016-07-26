@@ -60,7 +60,6 @@ module.exports = function (config) {
       'karma-sinon',
       'karma-nyan-reporter',
       'karma-unicorn-reporter',
-      'karma-phantomjs-launcher',
       'karma-chrome-launcher'
     ]
 
