@@ -50,7 +50,6 @@
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.1.1",
     "karma-nyan-reporter": "^0.2.4",
-    "karma-phantomjs-launcher": "^1.0.1",
     "karma-sinon": "^1.0.5",
     "karma-unicorn-reporter": "^0.1.4",
     "mocha": "^2.5.3",
