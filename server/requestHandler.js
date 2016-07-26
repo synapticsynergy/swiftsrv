@@ -3,12 +3,46 @@ var qs = require('querystring');
 var request = require('request');
 var _ = require('lodash');
 var UBER = require('node-uber');
-var Yelp = require('./config.js').Yelp;
-var uberConfig = require('./config.js').Uber;
-var host = require('./config.js').host;
+var n = require('nonce');
+// THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
+// YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
+// .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
+// var Yelp = require('./config.js').Yelp;
+// var uberConfig = require('./config.js').Uber;
+
+
+var ts = Date.now();
+var non = n();
+var host = "";
+
+if(process.env.PORT){
+  host = "https://swiftsrv.herokuapp.com";
+
+  Yelp = {
+    oauth_consumer_key: process.env.YELP_KEY,
+    consumersecret: process.env.YELP_SECRET,
+    oauth_token: process.env.YELP_OAUTH,
+    tokensecret: process.env.YELP_TOKEN,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: ts,
+    oauth_nonce: non(),
+    oauth_version: "1.0"
+  };
+
+  uberConfig = {
+    client_id: process.env.UBER_CLIENT_ID,
+    client_secret: process.env.UBER_CLIENT_SECRET,
+    server_token: process.env.UBER_SERVER_TOKEN,
+    redirect_uri: host + "/api/uberRedir",
+    name: "SwiftServ",
+    sandbox: true
+  };
+} else {
+  host = "http://localhost:3000";
+}
+
 
 var Uber = new UBER(uberConfig);
-
 
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
