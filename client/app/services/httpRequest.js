@@ -1,14 +1,12 @@
 angular.module('sqrtl.httpRequest', ["ngLodash"])
   .factory('Adventures', function($http, lodash){
-    //requests venues that meet location and category criteria
-    //TODO: add user parameters and such
-    // var data = [];
-
+    //http requests
+    /******************************/
+    //GET Request to server side for venues base on local and category
     var requestAdventures = function(location, category, cll){
 
-
       var url = '/api/getYelp';
-      //actual url is '/api/getYelp'
+
       return $http({
         method: 'POST',
         url: url,
@@ -18,10 +16,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
           cll: cll
         })
       }).then(function(resp){
-        // data.push(resp);
-        // resp = JSON.parse(resp);
-        console.log(resp.data.total);
-        console.log(resp.data);
+        //strips away unused yelp data
         data = resp.data.businesses.map(function(datum){
           return {
             url: datum.url,
@@ -35,9 +30,11 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
             location: datum.location
           };
         });
+        //orders by review count
         sortByReviewCount(data);
+        //randomizes the first five
         data = randomizeTopFive(data);
-
+        //adds array to localstorage fro permanence 
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
 
@@ -47,7 +44,40 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         console.error(err);
       });
     };
+    //get request to backend for uber
+    var getUber = function(){
+      return $http({
+        method: 'GET',
+        url: '/api/getUber'
+      }).then(function(resp){
+        return resp.data;
+      });
+    };
 
+    //returns price estimates by uber
+    var uberPrice = function(data){
+      return $http({
+        method: 'POST',
+        url: 'api/uberPrice',
+        data: JSON.stringify(data)
+      }).then(function(resp){
+        return resp.data;
+      });
+    };
+
+    //post request to serverside for uber
+    var uberRide = function(data){
+      return $http({
+        method: 'POST',
+        url: 'api/uberRide',
+        data: JSON.stringify(data)
+      }).then(function(resp){
+        return resp.data;
+      });
+    };
+
+    //helper functions
+    /*****************************/
     //sorts data by highest reviews first.
     var sortByReviewCount = function(data) {
       data.sort(function(a,b) {
@@ -61,6 +91,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       });
     };
 
+    //shuffles top five venues
     var randomizeTopFive = function(data) {
       var topFive = data.splice(0,5);
       var shuffledFive = lodash.shuffle(topFive);
@@ -68,43 +99,16 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       return newShuffledData;
     };
 
+    //takes off first venue and restores the data
     var dataShift = function(){
-
       data = JSON.parse(window.localStorage.getItem('data'));
       data.shift();
       data = randomizeTopFive(data);
       window.localStorage.setItem('data',JSON.stringify(data));
     };
 
-    var getUber = function(){
-      return $http({
-        method: 'GET',
-        url: '/api/getUber'
-      }).then(function(resp){
-        return resp.data;
-      });
-    };
 
-    var uberPrice = function(data){
-      return $http({
-        method: 'POST',
-        url: 'api/uberPrice',
-        data: JSON.stringify(data)
-      }).then(function(resp){
-        return resp.data;
-      });
-    };
-
-    var uberRide = function(data){
-      return $http({
-        method: 'POST',
-        url: 'api/uberRide',
-        data: JSON.stringify(data)
-      }).then(function(resp){
-        return resp.data;
-      });
-    };
-
+    //geolocates user
     var geoFindMe = function(callback){
       navigator.geolocation.getCurrentPosition(function(success){
         callback(success);
@@ -133,16 +137,21 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     };
 
     var findDistance = function(coordinates){
+      //adds a method that converts numbers to radions
       Number.prototype.toRad = function(){
         return this*Math.PI/180;
       }
+      //sets up the stwo points for calculation
       var lat1 = latitude,
           lon1 = longitude,
           lat2 = coordinates.latitude,
           lon2 = coordinates.longitude;
+      //tests whether the data is good 
       if(typeof lat1 != 'number' || typeof lat2 != 'number' ||typeof lon1 != 'number' || typeof lon2 != 'number'){
         return undefined;
-      }    
+      }
+
+      //distance between to points using longitude and latitude formula    
       var R = 6371e3,
           phi1 = lat1.toRad(),
           phi2 = lat2.toRad(),
