@@ -7,8 +7,8 @@ var n = require('nonce');
 // THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
 // YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
 // .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
-// var Yelp = require('./config.js').Yelp;
-// var uberConfig = require('./config.js').Uber;
+var Yelp = require('./config.js').Yelp;
+var uberConfig = require('./config.js').Uber;
 
 
 var ts = Date.now();

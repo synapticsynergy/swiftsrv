@@ -9,7 +9,7 @@ angular.module("sqrtl", [
     "ngLodash",
     "stormpath",
     "stormpath.templates",
-    "uiGmapgoogle-maps",
+    // "uiGmapgoogle-maps",
     "ngTouch"
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -62,14 +62,14 @@ angular.module("sqrtl", [
 
   })
   .run(function($stormpath, $rootScope, $state){
-    //informs stormpath what state associates with login 
+    //informs stormpath what state associates with login
     //and where to state to take afterwards
-    $stormpath.uiRouter({
-      loginState: 'login',
-      defaultPostLoginState: 'form'
-    });
-    //redirects users to the login state when a session expires
-    $rootScope.$on('$sessionEnd', function(){
-      $state.transitionTo('login');
-    });
+    // $stormpath.uiRouter({
+    //   loginState: 'login',
+    //   defaultPostLoginState: 'form'
+    // });
+    // //redirects users to the login state when a session expires
+    // $rootScope.$on('$sessionEnd', function(){
+    //   $state.transitionTo('login');
+    // });
   });
