@@ -24,7 +24,8 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   $scope.address = {
     long: $scope.data.location.coordinate.longitude,
     lat: $scope.data.location.coordinate.latitude,
-    templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.coordinate.latitude + ',' + $scope.data.location.coordinate.longitude
+    // templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.coordinate.latitude + ',' + $scope.data.location.coordinate.longitude
+    templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.address + ',' + $scope.data.location.city
   };
 
   //$scope method assignments
