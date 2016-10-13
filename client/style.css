@@ -45,3 +45,18 @@ body {
 #yelpLogo {
   width: 100%;
 }
+
+@media screen and (max-width: 600px) {
+  .imageSize {
+    visibility: hidden;
+    display: none;
+  }
+
+}
+
+
+
+
+
+
+

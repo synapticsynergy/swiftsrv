@@ -11,13 +11,12 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   //it will not render to the page if the distance isnt availible
   var distance = LocationFactory.findDistance($scope.data.location.coordinate);
   if (distance) {
-    distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' mi';
+    distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' Mi';
     window.localStorage.setItem('distanceCalc', distanceCalc);
     $scope.distance = window.localStorage.getItem('distanceCalc');
   } else if (window.localStorage.getItem('distanceCalc')) {
     $scope.distance = window.localStorage.getItem('distanceCalc');
   } else {
-    console.log('code was run...');
     $scope.distance = undefined;
   }
 
@@ -37,7 +36,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
     var distance = LocationFactory.findDistance($scope.data.location.coordinate);
     if (distance) {
-      distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' mi';
+      distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' Mi';
       window.localStorage.setItem('distanceCalc', distanceCalc);
       $scope.distance = window.localStorage.getItem('distanceCalc');
     } else if (window.localStorage.getItem('distanceCalc')) {
