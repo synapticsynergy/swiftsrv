@@ -16,7 +16,7 @@ var non = n();
 var host = "";
 
 if(process.env.PORT){
-  host = "https://swiftsrv.herokuapp.com";
+  host = "https://blakeswiftsrv.herokuapp.com";
 
   Yelp = {
     oauth_consumer_key: process.env.YELP_KEY,
