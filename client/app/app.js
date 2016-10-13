@@ -7,9 +7,9 @@ angular.module("sqrtl", [
     "ngRoute",
     "ui.bootstrap",
     "ngLodash",
-    "stormpath",
-    "stormpath.templates",
-    "uiGmapgoogle-maps",
+    // "stormpath",
+    // "stormpath.templates",
+    // "uiGmapgoogle-maps",
     "ngTouch"
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -26,25 +26,15 @@ angular.module("sqrtl", [
         url: '/form',
         templateUrl: 'app/form/form.html',
         controller: 'FormController',
-        //stormpath will check if the user is authenticated if there is a state change if they try to navigate to form, adventure, or uber.
-        sp: {
-          authenticate: true
-        }
       }).state('adventure', {
         url: '/adventure',
         templateUrl: 'app/adventureLand/Adventure.html',
         controller: 'AdventureController',
-        sp: {
-          authenticate: true
-        }
       })
       .state('uber',{
         url: '/uber',
         templateUrl: 'app/uber/uber.html',
         controller: 'UberController',
-        sp: {
-          authenticate: true
-        }
       })
       //stormpath authentication states
       .state('login', {
@@ -61,15 +51,15 @@ angular.module("sqrtl", [
       });
 
   })
-  .run(function($stormpath, $rootScope, $state){
-    //informs stormpath what state associates with login 
-    //and where to state to take afterwards
-    $stormpath.uiRouter({
-      loginState: 'login',
-      defaultPostLoginState: 'form'
-    });
-    //redirects users to the login state when a session expires
-    $rootScope.$on('$sessionEnd', function(){
-      $state.transitionTo('login');
-    });
-  });
+  // .run(function($stormpath, $rootScope, $state){
+  //   //informs stormpath what state associates with login
+  //   //and where to state to take afterwards
+  //   // $stormpath.uiRouter({
+  //   //   loginState: 'login',
+  //   //   defaultPostLoginState: 'form'
+  //   // });
+  //   // //redirects users to the login state when a session expires
+  //   // $rootScope.$on('$sessionEnd', function(){
+  //   //   $state.transitionTo('login');
+  //   // });
+  // });

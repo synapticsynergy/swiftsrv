@@ -41,3 +41,22 @@ body {
 
 .angular-google-map-container { height: 200px;
                                 width: 200px; }
+
+#yelpLogo {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .imageSize {
+    visibility: hidden;
+    display: none;
+  }
+
+}
+
+
+
+
+
+
+
