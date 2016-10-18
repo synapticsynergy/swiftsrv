@@ -55,5 +55,6 @@
     "nodemon": "^1.9.2",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
-  }
+  },
+  "engine": "node >= 4.4.7"
 }
