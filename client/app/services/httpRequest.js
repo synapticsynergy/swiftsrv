@@ -34,7 +34,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
         sortByReviewCount(data);
         //randomizes the first five
         data = randomizeTopFive(data);
-        //adds array to localstorage fro permanence 
+        //adds array to localstorage fro permanence
         window.localStorage.setItem('data',JSON.stringify(data));
         data = JSON.parse(window.localStorage.getItem('data'));
 
@@ -146,12 +146,12 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
           lon1 = longitude,
           lat2 = coordinates.latitude,
           lon2 = coordinates.longitude;
-      //tests whether the data is good 
+      //tests whether the data is good
       if(typeof lat1 != 'number' || typeof lat2 != 'number' ||typeof lon1 != 'number' || typeof lon2 != 'number'){
         return undefined;
       }
 
-      //distance between to points using longitude and latitude formula    
+      //distance between to points using longitude and latitude formula
       var R = 6371e3,
           phi1 = lat1.toRad(),
           phi2 = lat2.toRad(),
