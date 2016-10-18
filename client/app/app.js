@@ -35,22 +35,22 @@ angular.module("sqrtl", [
         url: '/uber',
         templateUrl: 'app/uber/uber.html',
         controller: 'UberController',
-      })
-      //stormpath authentication states
-      .state('login', {
-        url: '/login',
-        templateUrl: 'app/auth/login.html'
-      })
-      .state('register', {
-        url: '/register',
-        templateUrl: 'app/auth/register.html'
-      })
-      .state('forgot', {
-        url: '/forgot',
-        templateUrl: 'app/auth/forgotPassword.html'
       });
+      //stormpath authentication states
+      // .state('login', {
+      //   url: '/login',
+      //   templateUrl: 'app/auth/login.html'
+      // })
+      // .state('register', {
+      //   url: '/register',
+      //   templateUrl: 'app/auth/register.html'
+      // })
+      // .state('forgot', {
+      //   url: '/forgot',
+      //   templateUrl: 'app/auth/forgotPassword.html'
+      // });
 
-  })
+  });
   // .run(function($stormpath, $rootScope, $state){
   //   //informs stormpath what state associates with login
   //   //and where to state to take afterwards
