@@ -2,6 +2,9 @@
   "name": "sqrtl",
   "version": "1.0.0",
   "description": "> Pithy project description",
+  "engines": {
+    "node" : "4.4.7"
+  },
   "main": "index.js",
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install"
@@ -55,8 +58,5 @@
     "nodemon": "^1.9.2",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
-  },
-  "engines": {
-    "node >= 4.4.7"
-  },
+  }
 }
