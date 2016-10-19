@@ -7,9 +7,8 @@ var n = require('nonce');
 // THE FOLLOWING FILES ARE FOR CONFIGS FOR UBER AND YELP
 // YOU MUST MAKE YOUR OWN ACCOUNTS AND PUT THE INFORMATION IN THE
 // .CONFIG file.  THEN, UNCOMMENT THIS TO CONNECT IT.
-var Yelp = require('./config.js').Yelp;
-var uberConfig = require('./config.js').Uber;
-
+var Yelp;
+var uberConfig;
 
 var ts = Date.now();
 var non = n();
@@ -39,6 +38,8 @@ if(process.env.PORT){
   };
 } else {
   host = "http://localhost:3000";
+  Yelp = require('./config.js').Yelp;
+  uberConfig = require('./config.js').Uber;
 }
 
 
