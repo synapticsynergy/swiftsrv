@@ -51,13 +51,12 @@ var yelpGetToken = function(){
   var baseurl = 'https://api.yelp.com/oauth2/token';
    
 
-request.post({url:'https://api.yelp.com/oauth2/token',form: {client_id:Yelp.client_id, client_secret:Yelp.client_secret}, function(){
-  
-};
+  request.post({url:'https://api.yelp.com/oauth2/token',form: {grant_type: 'client_credentials', client_id: Yelp.client_id, client_secret: Yelp.client_secret}}, function(err,response,body){
 
+    var access_token = JSON.parse(response.body).access_token;
+  });
 
-} 
-
+}();
 
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
