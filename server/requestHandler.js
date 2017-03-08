@@ -1,6 +1,7 @@
 var oauthSignature = require('oauth-signature');
 var qs = require('querystring');
 var request = require('request');
+var http = require('http');
 var _ = require('lodash');
 var UBER = require('node-uber');
 var n = require('nonce');
@@ -44,6 +45,19 @@ if(process.env.PORT){
 
 
 var Uber = new UBER(uberConfig);
+
+//OAuth2 uses accesstokens. get access token first
+var yelpGetToken = function(){
+  var baseurl = 'https://api.yelp.com/oauth2/token';
+   
+
+request.post({url:'https://api.yelp.com/oauth2/token',form: {client_id:Yelp.client_id, client_secret:Yelp.client_secret}, function(){
+  
+};
+
+
+} 
+
 
 var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v2/search';
