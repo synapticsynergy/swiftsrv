@@ -1,6 +1,7 @@
 var oauthSignature = require('oauth-signature');
 var qs = require('querystring');
 var request = require('request');
+var rp = require('request-promise');
 var http = require('http');
 var _ = require('lodash');
 var UBER = require('node-uber');
@@ -46,24 +47,12 @@ if(process.env.PORT){
 
 var Uber = new UBER(uberConfig);
 
-//OAuth2 uses accesstokens. get access token first
-var yelpGetToken = function(){
-  var baseurl = 'https://api.yelp.com/oauth2/token';
-
-  request.post({url:'https://api.yelp.com/oauth2/token',form: {grant_type: 'client_credentials', client_id: Yelp.client_id, client_secret: Yelp.client_secret}}, function(err,response,body){
-
-    var yelp_access_token = JSON.parse(response.body).access_token;
-
-    return yelp_access_token;
-  });
-
-};
 
 var constructQuery = function(searchParam){
   // var baseurl = 'https://api.yelp.com/v2/search';
   var baseurl = 'https://api.yelp.com/v3/businesses/search';
 
-  var params = {  limit: 20,
+  var params = {  limit: 50,
                   // sort: 2
                   sort_by: 'review_count'
                   };
@@ -89,21 +78,29 @@ module.exports = {
     console.log('req body is: ', req.body);
     //data: {category: "", location: ""}
     var yelpURL = constructQuery(req.body);
-    var yelp_access_token = yelpGetToken();
-    console.log(yelp_access_token,'is this working?????')
-    var yelpAuth = {auth: {bearer: yelp_access_token}};
 
-    request(yelpURL, yelpAuth, function(err, response, body){
-      //send GET request to YELP API, receive YELP result in response
-      //send response as res for getYelp request.
-      if (!err && response.statusCode === 200){
-        console.log(body);
-        res.status(200).send(body);
-      } else {
-        //error getting stuff from yelp
-        console.log('error getting stuff from Yelp');
-      }
+    var yelp_access_token;
+
+    request.post({url:'https://api.yelp.com/oauth2/token',form: {grant_type: 'client_credentials', client_id: Yelp.client_id, client_secret: Yelp.client_secret}}, function(err,response,body){
+
+      yelp_access_token = JSON.parse(response.body).access_token;
+      var yelpAuth = {auth: {bearer: yelp_access_token}};
+
+      request(yelpURL, yelpAuth, function(err, response, body){
+        //send GET request to YELP API, receive YELP result in response
+        //send response as res for getYelp request.
+        if (!err && response.statusCode === 200){
+          console.log(body);
+          res.status(200).send(body);
+        } else {
+          //error getting stuff from yelp
+          console.log('error getting stuff from Yelp');
+        }
+      });
     });
+
+
+
 
   },
 

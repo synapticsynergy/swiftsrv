@@ -5,6 +5,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   /**************************/
 
   //sets the scope data from local storage
+  console.log(window.localStorage.getItem('data'));
   $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
 
   //gets distance to venue and formats it to kilometers,
