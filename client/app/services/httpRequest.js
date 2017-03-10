@@ -128,9 +128,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
 
   })
   .factory("LocationFactory", function($window){
-    var origin = window.localStorage.getItem('origin');
-    var destination;
-
+    
 
 
     var setCoordinates = function(coordinates){
@@ -139,26 +137,38 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       latitude = coordinates.latitude;
     };
 
-    var findDistance = function(){
-      var directionsService = new google.maps.DirectionsService();
+    // var findDistance = function(){
+    //   var data = JSON.parse(window.localStorage.getItem('data'))[0];
+    //   var origin = window.localStorage.getItem('origin');
+    //   console.log(data.location.city,'city working...');
+    //   var destination = data.location.address1 + ' ' + data.location.address2 + ' ' + data.location.address3 + ' ' + data.location.city || origin;
 
-      var request = {
-        origin      : origin, // a city, full address, landmark etc
-        destination : 'Sydney NSW',
-        travelMode  : google.maps.DirectionsTravelMode.DRIVING
-      };
+    //   var directionsService = new google.maps.DirectionsService();
 
-      directionsService.route(request, function(response, status) {
-        if ( status == google.maps.DirectionsStatus.OK ) {
-          console.log(response.routes[0].legs[0].distance.value,'this is the distance!!!!!'); // the distance in metres
-        }
-        else {
-          // oops, there's no route between these two locations
-          // every time this happens, a kitten dies
-          // so please, ensure your address is formatted properly
-        }
-      });
-    }
+    //   var request = {
+    //     origin      : origin, // a city, full address, landmark etc
+    //     destination : destination,
+    //     travelMode  : google.maps.DirectionsTravelMode.DRIVING
+    //   };
+
+    //   directionsService.route(request, function(response, status) {
+    //     if ( status == google.maps.DirectionsStatus.OK ) {
+    //       var distance = Math.ceil(response.routes[0].legs[0].distance.value / 1609.34); // the distance in metres
+    //       console.log(distance,'.........');
+    //       if (distance) {
+    //         window.localStorage.setItem('distance',distance);
+
+    //       } else {
+    //         $scope.distance = undefined;
+    //       }
+    //     }
+    //     else {
+    //       // oops, there's no route between these two locations
+    //       // every time this happens, a kitten dies
+    //       // so please, ensure your address is formatted properly
+    //     }
+    //   });
+    // }
 
     // var findDistance = function(coordinates){
     //   //adds a method that converts numbers to radions
@@ -191,7 +201,7 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
     // };
 
     return {
-      setCoordinates: setCoordinates,
-      findDistance: findDistance
+      setCoordinates: setCoordinates
+      // findDistance: findDistance
     };
   });
