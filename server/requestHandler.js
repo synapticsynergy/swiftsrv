@@ -20,14 +20,8 @@ if(process.env.PORT){
   host = "https://blaked.herokuapp.com";
 
   Yelp = {
-    oauth_consumer_key: process.env.YELP_KEY,
-    consumersecret: process.env.YELP_SECRET,
-    oauth_token: process.env.YELP_OAUTH,
-    tokensecret: process.env.YELP_TOKEN,
-    oauth_signature_method: "HMAC-SHA1",
-    oauth_timestamp: ts,
-    oauth_nonce: non(),
-    oauth_version: "1.0"
+    client_secret: process.env.YELP_SECRET,
+    client_id: process.env.YELP_CLIENT_ID,
   };
 
   uberConfig = {
