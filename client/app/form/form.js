@@ -53,8 +53,10 @@ angular.module("sqrtl.form", ['ngTouch'])
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               $scope.$apply(function(){
-                console.log("geocode results ", results[0].formatted_address);
-                $scope.location = results[0].formatted_address;
+                window.localStorage.setItem('origin', results[0].formatted_address);
+                var origin = window.localStorage.getItem('origin');
+                console.log(origin,'origin results');
+                $scope.location = origin;
               });
             } else {
               console.log("Geocoder failed due to: " + status);

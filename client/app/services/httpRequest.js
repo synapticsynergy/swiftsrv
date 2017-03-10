@@ -128,7 +128,10 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
 
   })
   .factory("LocationFactory", function($window){
-    var longitude, latitude;
+    var origin = window.localStorage.getItem('origin');
+    var destination;
+
+
 
     var setCoordinates = function(coordinates){
       $window.localStorage.setItem('LocationFactoryCoordinates', JSON.stringify(coordinates));
@@ -136,35 +139,56 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       latitude = coordinates.latitude;
     };
 
-    var findDistance = function(coordinates){
-      //adds a method that converts numbers to radions
-      Number.prototype.toRad = function(){
-        return this*Math.PI/180;
-      }
-      //sets up the stwo points for calculation
-      var lat1 = latitude,
-          lon1 = longitude,
-          lat2 = coordinates.latitude,
-          lon2 = coordinates.longitude;
-      //tests whether the data is good
-      if(typeof lat1 != 'number' || typeof lat2 != 'number' ||typeof lon1 != 'number' || typeof lon2 != 'number'){
-        return undefined;
-      }
+    var findDistance = function(){
+      var directionsService = new google.maps.DirectionsService();
 
-      //distance between to points using longitude and latitude formula
-      var R = 6371e3,
-          phi1 = lat1.toRad(),
-          phi2 = lat2.toRad(),
-          deltaPhi = (lat1 - lat2).toRad(),
-          deltaLambda = (lon1 - lon2).toRad();
+      var request = {
+        origin      : origin, // a city, full address, landmark etc
+        destination : 'Sydney NSW',
+        travelMode  : google.maps.DirectionsTravelMode.DRIVING
+      };
 
-      var a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2)+
-              Math.cos(phi1) * Math.cos(phi2) *
-              Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      directionsService.route(request, function(response, status) {
+        if ( status == google.maps.DirectionsStatus.OK ) {
+          console.log(response.routes[0].legs[0].distance.value,'this is the distance!!!!!'); // the distance in metres
+        }
+        else {
+          // oops, there's no route between these two locations
+          // every time this happens, a kitten dies
+          // so please, ensure your address is formatted properly
+        }
+      });
+    }
 
-      return Math.floor(R * c)/1000;
-    };
+    // var findDistance = function(coordinates){
+    //   //adds a method that converts numbers to radions
+    //   Number.prototype.toRad = function(){
+    //     return this*Math.PI/180;
+    //   }
+    //   //sets up the stwo points for calculation
+    //   var lat1 = latitude,
+    //       lon1 = longitude,
+    //       lat2 = coordinates.latitude,
+    //       lon2 = coordinates.longitude;
+    //   //tests whether the data is good
+    //   if(typeof lat1 != 'number' || typeof lat2 != 'number' ||typeof lon1 != 'number' || typeof lon2 != 'number'){
+    //     return undefined;
+    //   }
+
+    //   //distance between to points using longitude and latitude formula
+    //   var R = 6371e3,
+    //       phi1 = lat1.toRad(),
+    //       phi2 = lat2.toRad(),
+    //       deltaPhi = (lat1 - lat2).toRad(),
+    //       deltaLambda = (lon1 - lon2).toRad();
+
+    //   var a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2)+
+    //           Math.cos(phi1) * Math.cos(phi2) *
+    //           Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
+    //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    //   return Math.floor(R * c)/1000;
+    // };
 
     return {
       setCoordinates: setCoordinates,

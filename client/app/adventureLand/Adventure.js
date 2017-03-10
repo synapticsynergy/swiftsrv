@@ -12,7 +12,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   //gets distance to venue and formats it to kilometers,
   //it will not render to the page if the distance isnt availible
 
-  // var distance = LocationFactory.findDistance($scope.data.location.coordinate);
+  var distance = LocationFactory.findDistance();
   // if (distance) {
   //   distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' Mi';
   //   window.localStorage.setItem('distanceCalc', distanceCalc);
