@@ -47,7 +47,7 @@ var constructQuery = function(searchParam){
   var baseurl = 'https://api.yelp.com/v3/businesses/search';
 
   var params = {  limit: 50,
-                  // sort: 2
+                  open_now: true,
                   sort_by: 'review_count'
                   };
 
