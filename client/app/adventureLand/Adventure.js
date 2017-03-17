@@ -8,6 +8,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   var dataShape = JSON.parse(window.localStorage.getItem('data'))[0];
   console.log(dataShape);
   $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+  var directionsService = new google.maps.DirectionsService();
 
   //since the method requesting distance from gmaps doesn't return anything,
   //we need to find the distance in the controller to avoid race conditions.
@@ -16,7 +17,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     var origin = window.localStorage.getItem('origin');
     var destination = data.location.address1 + ' ' + data.location.address2 + ' ' + data.location.address3 + ' ' + data.location.city || origin;
 
-    var directionsService = new google.maps.DirectionsService();
+
 
     var request = {
       origin      : origin, // a city, full address, landmark etc
@@ -25,23 +26,25 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     };
 
     directionsService.route(request, function(response, status) {
-      if ( status == google.maps.DirectionsStatus.OK ) {
-        var distance = Math.ceil(response.routes[0].legs[0].distance.value / 1609.34) + 'Miles'; // the distance in metres
-        if (distance) {
-          window.localStorage.setItem('distance',distance);
-          $scope.distance = window.localStorage.getItem('distance');
-          console.log($scope.distance,'scope distance');
-        } else if (window.localStorage.getItem('distance')) {
-          $scope.distance = window.localStorage.getItem('distance');
-        } else {
-          $scope.distance = undefined;
+
+      $scope.$apply(function() {
+        if ( status == google.maps.DirectionsStatus.OK ) {
+          var distance = Math.ceil(response.routes[0].legs[0].distance.value / 1609.34) + ' Miles'; // the distance in metres
+          if (distance) {
+            window.localStorage.setItem('distance',distance);
+            $scope.distance = window.localStorage.getItem('distance');
+            console.log($scope.distance,'scope distance');
+          } else {
+            $scope.distance = undefined;
+          }
         }
-      }
-      else {
-        // oops, there's no route between these two locations
-        // every time this happens, a kitten dies
-        // so please, ensure your address is formatted properly
-      }
+        else {
+          // oops, there's no route between these two locations
+          // every time this happens, a kitten dies
+          // so please, ensure your address is formatted properly
+        }
+      });
+
     });
   }
 
@@ -64,6 +67,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   $scope.getNew = function(){
     Adventures.dataShift();
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
+    $scope.distance = undefined;
 
 
 
