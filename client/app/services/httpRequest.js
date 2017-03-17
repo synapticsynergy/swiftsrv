@@ -107,7 +107,6 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       window.localStorage.setItem('data',JSON.stringify(data));
     };
 
-
     //geolocates user
     var geoFindMe = function(callback){
       navigator.geolocation.getCurrentPosition(function(success){
@@ -124,81 +123,14 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
       geoFindMe: geoFindMe
     };
 
-
-
   })
   .factory("LocationFactory", function($window){
-    
-
 
     var setCoordinates = function(coordinates){
       $window.localStorage.setItem('LocationFactoryCoordinates', JSON.stringify(coordinates));
       longitude = coordinates.longitude;
       latitude = coordinates.latitude;
     };
-
-    // var findDistance = function(){
-    //   var data = JSON.parse(window.localStorage.getItem('data'))[0];
-    //   var origin = window.localStorage.getItem('origin');
-    //   console.log(data.location.city,'city working...');
-    //   var destination = data.location.address1 + ' ' + data.location.address2 + ' ' + data.location.address3 + ' ' + data.location.city || origin;
-
-    //   var directionsService = new google.maps.DirectionsService();
-
-    //   var request = {
-    //     origin      : origin, // a city, full address, landmark etc
-    //     destination : destination,
-    //     travelMode  : google.maps.DirectionsTravelMode.DRIVING
-    //   };
-
-    //   directionsService.route(request, function(response, status) {
-    //     if ( status == google.maps.DirectionsStatus.OK ) {
-    //       var distance = Math.ceil(response.routes[0].legs[0].distance.value / 1609.34); // the distance in metres
-    //       console.log(distance,'.........');
-    //       if (distance) {
-    //         window.localStorage.setItem('distance',distance);
-
-    //       } else {
-    //         $scope.distance = undefined;
-    //       }
-    //     }
-    //     else {
-    //       // oops, there's no route between these two locations
-    //       // every time this happens, a kitten dies
-    //       // so please, ensure your address is formatted properly
-    //     }
-    //   });
-    // }
-
-    // var findDistance = function(coordinates){
-    //   //adds a method that converts numbers to radions
-    //   Number.prototype.toRad = function(){
-    //     return this*Math.PI/180;
-    //   }
-    //   //sets up the stwo points for calculation
-    //   var lat1 = latitude,
-    //       lon1 = longitude,
-    //       lat2 = coordinates.latitude,
-    //       lon2 = coordinates.longitude;
-    //   //tests whether the data is good
-    //   if(typeof lat1 != 'number' || typeof lat2 != 'number' ||typeof lon1 != 'number' || typeof lon2 != 'number'){
-    //     return undefined;
-    //   }
-
-    //   //distance between to points using longitude and latitude formula
-    //   var R = 6371e3,
-    //       phi1 = lat1.toRad(),
-    //       phi2 = lat2.toRad(),
-    //       deltaPhi = (lat1 - lat2).toRad(),
-    //       deltaLambda = (lon1 - lon2).toRad();
-
-    //   var a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2)+
-    //           Math.cos(phi1) * Math.cos(phi2) *
-    //           Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
-    //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    //   return Math.floor(R * c)/1000;
-    // };
 
     return {
       setCoordinates: setCoordinates

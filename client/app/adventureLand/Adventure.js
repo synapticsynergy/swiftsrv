@@ -17,8 +17,6 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     var origin = window.localStorage.getItem('origin');
     var destination = data.location.address1 + ' ' + data.location.address2 + ' ' + data.location.address3 + ' ' + data.location.city || origin;
 
-
-
     var request = {
       origin      : origin, // a city, full address, landmark etc
       destination : destination,
@@ -26,7 +24,6 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     };
 
     directionsService.route(request, function(response, status) {
-
       $scope.$apply(function() {
         if ( status == google.maps.DirectionsStatus.OK ) {
           var distance = Math.ceil(response.routes[0].legs[0].distance.value / 1609.34) + ' Miles'; // the distance in metres
@@ -44,7 +41,6 @@ angular.module('sqrtl.adventure', ["ngTouch"])
           // so please, ensure your address is formatted properly
         }
       });
-
     });
   }
 
@@ -68,25 +64,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     Adventures.dataShift();
     $scope.data = JSON.parse(window.localStorage.getItem('data'))[0];
     $scope.distance = undefined;
-
-
-
     findDistance();
-
-
-
-
-
-    // if (distance) {
-    //   distanceCalc = Math.round(distance * 10 * 0.62137)/10 + ' Mi';
-    //   window.localStorage.setItem('distanceCalc', distanceCalc);
-    //   $scope.distance = window.localStorage.getItem('distanceCalc');
-    // } else if (window.localStorage.getItem('distanceCalc')) {
-    //   $scope.distance = window.localStorage.getItem('distanceCalc');
-    // } else {
-    //   console.log('code was run...');
-    //   $scope.distance = undefined;
-    // }
   };
 
   //requsts uber with you coordinates and then redirects your to ubers login
