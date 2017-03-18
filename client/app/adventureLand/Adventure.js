@@ -44,17 +44,17 @@ angular.module('sqrtl.adventure', ["ngTouch"])
     });
   }
 
-  //gets distance to venue and formats it to kilometers,
-  //it will not render to the page if the distance isnt availible
-
-  findDistance();
-
-
 
   //assigns the coordinates and google maps url
-  $scope.address = {
-    templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.address1 + ' ' + $scope.data.location.address2 + ' ' + $scope.data.location.address3 + ',' + $scope.data.location.city
+  $scope.refreshAddress = function(data) {
+      $scope.address = {
+        templateUrl: 'http://maps.google.com/maps?q=' + data.location.address1 + ' ' + data.location.address2 + ' ' + data.location.address3 + ',' + data.location.city
+        };
   };
+
+  findDistance();
+  $scope.refreshAddress($scope.data);
+
 
   //$scope method assignments
   /**************************/
@@ -87,9 +87,7 @@ angular.module('sqrtl.adventure', ["ngTouch"])
   //redirects to google maps with that location preloaded
   $scope.googleRedirect = function(){
   //assigns the coordinates and google maps url
-    $scope.address = {
-      templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.address1 + ' ' + $scope.data.location.address2 + ' ' + $scope.data.location.address3 + ',' + $scope.data.location.city
-    };
+    $scope.refreshAddress($scope.data);
     $window.location.href = $scope.address.templateUrl;
   };
 
