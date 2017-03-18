@@ -86,6 +86,10 @@ angular.module('sqrtl.adventure', ["ngTouch"])
 
   //redirects to google maps with that location preloaded
   $scope.googleRedirect = function(){
+  //assigns the coordinates and google maps url
+    $scope.address = {
+      templateUrl: 'http://maps.google.com/maps?q=' + $scope.data.location.address1 + ' ' + $scope.data.location.address2 + ' ' + $scope.data.location.address3 + ',' + $scope.data.location.city
+    };
     $window.location.href = $scope.address.templateUrl;
   };
 
