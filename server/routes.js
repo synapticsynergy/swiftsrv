@@ -1,10 +1,11 @@
 var requestHandler = require('./requestHandler.js');
 var path = require('path');
+var cors = require('cors');
 //add other controllers here
 
-
-
 module.exports = function (app, express){
+  app.use(cors());
+
   app.post('/api/getYelp', requestHandler.getYelp);
 
   app.get('/api/getUber', requestHandler.getUber);
