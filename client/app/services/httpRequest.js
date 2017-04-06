@@ -27,7 +27,8 @@ angular.module('sqrtl.httpRequest', ["ngLodash"])
             ratingImg: datum.rating_img_url,
             reviewCount: datum.review_count,
             snippet: datum.snippet,
-            location: datum.location
+            location: datum.location,
+            distance: datum.distance
           };
         });
         //orders by review count
