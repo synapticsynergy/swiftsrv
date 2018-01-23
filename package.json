@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "> Pithy project description",
   "engines": {
-    "node": "4.4.7"
+    "node": "8.9.0"
   },
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-express-server": "^0.5.3",
     "grunt-init": "^0.3.2",
+    "grunt-karma": "^2.0.0",
+    "grunt-mocha": "^1.0.2",
     "grunt-nodemon": "^0.2.1",
     "grunt-shell": "^0.6.4",
     "lodash": "^4.13.1",
@@ -58,8 +60,6 @@
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2",
     "sinon": "^1.17.4",
-    "supertest": "^1.2.0",
-    "grunt-karma": "^2.0.0",
-    "grunt-mocha": "^1.0.2"
+    "supertest": "^1.2.0"
   }
 }
