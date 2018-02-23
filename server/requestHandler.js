@@ -48,7 +48,7 @@ var constructQuery = function(searchParam){
 
   var params = {  limit: 50,
                   open_now: true,
-                  sort_by: 'review_count'
+                  sort_by: 'best_match'
                   };
 
   // var fullParams = _.extend(params, searchParam, Yelp);
