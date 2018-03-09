@@ -22,6 +22,7 @@ if(process.env.PORT){
   Yelp = {
     client_secret: process.env.YELP_SECRET,
     client_id: process.env.YELP_CLIENT_ID,
+    API_key: process.env.YELP_API_KEY
   };
 
   uberConfig = {
@@ -78,7 +79,10 @@ module.exports = {
     request.post({url:'https://api.yelp.com/oauth2/token',form: {grant_type: 'client_credentials', client_id: Yelp.client_id, client_secret: Yelp.client_secret}}, function(err,response,body){
 
       yelp_access_token = JSON.parse(response.body).access_token;
-      var yelpAuth = {auth: {bearer: yelp_access_token}};
+      // var yelpAuth = {auth: {bearer: yelp_access_token}};
+
+      //Quick change for auth change. API key only needed now.
+      var yelpAuth = {auth: {bearer: Yelp.API_key}};
 
       request(yelpURL, yelpAuth, function(err, response, body){
         //send GET request to YELP API, receive YELP result in response
